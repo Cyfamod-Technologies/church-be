@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BranchController;
+use App\Http\Controllers\Api\BranchTagController;
 use App\Http\Controllers\Api\ChurchController;
 use App\Http\Controllers\Api\ChurchRegistrationController;
 use App\Http\Controllers\Api\LocationController;
@@ -21,6 +23,18 @@ Route::put('churches/{church}/service-schedules', [ChurchController::class, 'upd
 Route::get('attendance', [AttendanceController::class, 'index']);
 Route::get('attendance/summary', [AttendanceController::class, 'summary']);
 Route::post('attendance', [AttendanceController::class, 'store']);
+
+Route::get('branch-tags', [BranchTagController::class, 'index']);
+Route::post('branch-tags', [BranchTagController::class, 'store']);
+Route::delete('branch-tags/{branchTag}', [BranchTagController::class, 'destroy']);
+
+Route::get('branch-parents', [BranchController::class, 'parentOptions']);
+Route::get('branches', [BranchController::class, 'index']);
+Route::post('branches', [BranchController::class, 'store']);
+Route::get('branches/{branch}', [BranchController::class, 'show']);
+Route::put('branches/{branch}', [BranchController::class, 'update']);
+Route::post('branches/{branch}/reassign', [BranchController::class, 'reassign']);
+Route::post('branches/{branch}/detach', [BranchController::class, 'detach']);
 
 Route::prefix('locations')->group(function (): void {
     Route::get('states', [LocationController::class, 'states']);

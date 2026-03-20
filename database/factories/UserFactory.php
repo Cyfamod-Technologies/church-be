@@ -26,6 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'church_id' => null,
+            'branch_id' => null,
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->numerify('+234##########'),

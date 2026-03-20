@@ -16,6 +16,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'church_id',
+        'branch_id',
         'name',
         'email',
         'phone',
@@ -44,5 +45,10 @@ class User extends Authenticatable
     public function church(): BelongsTo
     {
         return $this->belongsTo(Church::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
     }
 }
