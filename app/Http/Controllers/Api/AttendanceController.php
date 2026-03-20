@@ -15,8 +15,9 @@ class AttendanceController extends Controller
     public function index(Request $request): JsonResponse
     {
         $records = AttendanceRecord::query()
-            ->with(['church:id,name,code', 'serviceSchedule:id,label,service_type', 'recordedBy:id,name,email'])
+            ->with(['church:id,name,code', 'branch:id,name,code', 'serviceSchedule:id,label,service_type', 'recordedBy:id,name,email'])
             ->when($request->integer('church_id'), fn (Builder $query, int $churchId) => $query->where('church_id', $churchId))
+            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
             ->when($request->filled('service_type'), fn (Builder $query) => $query->where('service_type', $request->string('service_type')->toString()))
             ->when($request->filled('date_from'), fn (Builder $query) => $query->whereDate('service_date', '>=', $request->date('date_from')))
             ->when($request->filled('date_to'), fn (Builder $query) => $query->whereDate('service_date', '<=', $request->date('date_to')))
@@ -35,6 +36,7 @@ class AttendanceController extends Controller
 
         $record = AttendanceRecord::create([
             'church_id' => $validated['church_id'],
+            'branch_id' => $validated['branch_id'] ?? null,
             'service_schedule_id' => $validated['service_schedule_id'] ?? null,
             'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
             'service_date' => $validated['service_date'],
@@ -53,7 +55,7 @@ class AttendanceController extends Controller
             'tithe' => $validated['tithe'] ?? null,
             'special_offering' => $validated['special_offering'] ?? null,
             'notes' => $validated['notes'] ?? null,
-        ])->load(['church:id,name,code', 'serviceSchedule:id,label,service_type']);
+        ])->load(['church:id,name,code', 'branch:id,name,code', 'serviceSchedule:id,label,service_type']);
 
         return response()->json([
             'message' => 'Attendance saved successfully.',
@@ -65,6 +67,7 @@ class AttendanceController extends Controller
     {
         $request->validate([
             'church_id' => ['required', 'integer', 'exists:churches,id'],
+            'branch_id' => ['nullable', 'integer', 'exists:branches,id'],
             'period' => ['nullable', 'in:weekly,monthly'],
             'date' => ['nullable', 'date'],
         ]);
@@ -80,6 +83,7 @@ class AttendanceController extends Controller
 
         $records = AttendanceRecord::query()
             ->where('church_id', $request->integer('church_id'))
+            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
             ->whereBetween('service_date', [$dateFrom->toDateString(), $dateTo->toDateString()])
             ->orderBy('service_date')
             ->get();

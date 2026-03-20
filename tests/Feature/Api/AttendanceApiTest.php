@@ -89,4 +89,47 @@ class AttendanceApiTest extends TestCase
             ->assertJsonPath('data.average_attendance', 225)
             ->assertJsonPath('data.highest_service.service_label', '1st Service');
     }
+
+    public function test_attendance_can_be_linked_to_a_branch_and_summary_can_filter_by_branch(): void
+    {
+        $church = Church::factory()->create();
+        $user = User::factory()->create(['church_id' => $church->id]);
+        $branchTagId = $this->postJson('/api/branch-tags', [
+            'church_id' => $church->id,
+            'name' => 'District',
+        ])->json('data.id');
+        $branchId = $this->postJson('/api/branches', [
+            'name' => 'Attendance Branch',
+            'branch_tag_id' => $branchTagId,
+            'created_by_church_id' => $church->id,
+            'created_by_user_id' => $user->id,
+            'created_by_actor_type' => 'user',
+        ])->json('data.id');
+
+        $response = $this->postJson('/api/attendance', [
+            'church_id' => $church->id,
+            'branch_id' => $branchId,
+            'recorded_by_user_id' => $user->id,
+            'service_date' => '2026-03-20',
+            'service_type' => 'special',
+            'service_label' => 'Leadership Congress',
+            'special_service_name' => 'Leadership Congress',
+            'male_count' => 40,
+            'female_count' => 55,
+            'children_count' => 5,
+        ]);
+
+        $response->assertCreated()
+            ->assertJsonPath('data.branch.id', $branchId)
+            ->assertJsonPath('data.total_count', 100);
+
+        $summaryResponse = $this->getJson('/api/attendance/summary?church_id='.$church->id.'&branch_id='.$branchId.'&period=weekly&date=2026-03-20');
+        $listResponse = $this->getJson('/api/attendance?church_id='.$church->id.'&branch_id='.$branchId);
+
+        $summaryResponse->assertOk()
+            ->assertJsonPath('data.total_attendance', 100);
+
+        $listResponse->assertOk()
+            ->assertJsonPath('data.0.branch.id', $branchId);
+    }
 }

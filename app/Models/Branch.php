@@ -94,4 +94,9 @@ class Branch extends Model
     {
         return $this->hasMany(Homecell::class)->latest('name');
     }
+
+    public function homecellAttendanceRecords(): HasMany
+    {
+        return $this->hasMany(HomecellAttendanceRecord::class)->latest('meeting_date');
+    }
 }

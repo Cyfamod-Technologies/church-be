@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\Branch;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class StoreAttendanceRequest extends FormRequest
 {
@@ -15,6 +17,7 @@ class StoreAttendanceRequest extends FormRequest
     {
         return [
             'church_id' => ['required', 'integer', 'exists:churches,id'],
+            'branch_id' => ['nullable', 'integer', 'exists:branches,id'],
             'service_schedule_id' => ['nullable', 'integer', 'exists:service_schedules,id'],
             'recorded_by_user_id' => ['nullable', 'integer', 'exists:users,id'],
             'service_date' => ['required', 'date'],
@@ -33,5 +36,26 @@ class StoreAttendanceRequest extends FormRequest
             'special_offering' => ['nullable', 'numeric', 'min:0'],
             'notes' => ['nullable', 'string'],
         ];
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator): void {
+            $churchId = $this->integer('church_id');
+            $branchId = $this->integer('branch_id');
+
+            if (! $branchId || ! $churchId) {
+                return;
+            }
+
+            $branchBelongsToChurch = Branch::query()
+                ->whereKey($branchId)
+                ->where('created_by_church_id', $churchId)
+                ->exists();
+
+            if (! $branchBelongsToChurch) {
+                $validator->errors()->add('branch_id', 'Select a branch that belongs to this church.');
+            }
+        });
     }
 }

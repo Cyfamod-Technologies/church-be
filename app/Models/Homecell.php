@@ -40,4 +40,9 @@ class Homecell extends Model
     {
         return $this->hasMany(HomecellLeader::class)->orderBy('sort_order')->orderByDesc('is_primary');
     }
+
+    public function attendanceRecords(): HasMany
+    {
+        return $this->hasMany(HomecellAttendanceRecord::class)->latest('meeting_date');
+    }
 }
