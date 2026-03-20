@@ -17,6 +17,8 @@ class ServiceSchedule extends Model
         'label',
         'day_name',
         'service_time',
+        'recurrence_type',
+        'recurrence_detail',
         'sort_order',
         'is_active',
     ];

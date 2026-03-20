@@ -13,7 +13,10 @@ Route::prefix('auth')->group(function (): void {
 
 Route::post('churches/register', [ChurchRegistrationController::class, 'store']);
 Route::get('churches/{church}', [ChurchController::class, 'show']);
+Route::put('churches/{church}', [ChurchController::class, 'update']);
+Route::put('churches/{church}/profile', [ChurchController::class, 'updateProfile']);
 Route::get('churches/{church}/service-schedules', [ChurchController::class, 'serviceSchedules']);
+Route::put('churches/{church}/service-schedules', [ChurchController::class, 'updateServiceSchedules']);
 
 Route::get('attendance', [AttendanceController::class, 'index']);
 Route::get('attendance/summary', [AttendanceController::class, 'summary']);
