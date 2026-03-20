@@ -49,4 +49,9 @@ class Church extends Model
     {
         return $this->hasMany(AttendanceRecord::class)->latest('service_date');
     }
+
+    public function homecells(): HasMany
+    {
+        return $this->hasMany(Homecell::class)->latest('name');
+    }
 }

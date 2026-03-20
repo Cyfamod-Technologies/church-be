@@ -89,4 +89,9 @@ class Branch extends Model
     {
         return $this->users()->where('role', 'branch_admin')->latest('id');
     }
+
+    public function homecells(): HasMany
+    {
+        return $this->hasMany(Homecell::class)->latest('name');
+    }
 }

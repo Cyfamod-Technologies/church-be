@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BranchController;
 use App\Http\Controllers\Api\BranchTagController;
 use App\Http\Controllers\Api\ChurchController;
 use App\Http\Controllers\Api\ChurchRegistrationController;
+use App\Http\Controllers\Api\HomecellController;
 use App\Http\Controllers\Api\LocationController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,11 @@ Route::get('branches/{branch}', [BranchController::class, 'show']);
 Route::put('branches/{branch}', [BranchController::class, 'update']);
 Route::post('branches/{branch}/reassign', [BranchController::class, 'reassign']);
 Route::post('branches/{branch}/detach', [BranchController::class, 'detach']);
+
+Route::get('homecells', [HomecellController::class, 'index']);
+Route::post('homecells', [HomecellController::class, 'store']);
+Route::get('homecells/{homecell}', [HomecellController::class, 'show']);
+Route::put('homecells/{homecell}', [HomecellController::class, 'update']);
 
 Route::prefix('locations')->group(function (): void {
     Route::get('states', [LocationController::class, 'states']);
