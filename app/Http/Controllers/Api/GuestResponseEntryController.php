@@ -9,6 +9,7 @@ use App\Models\GuestResponseEntry;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuestResponseEntryController extends Controller
 {
@@ -25,7 +26,7 @@ class GuestResponseEntryController extends Controller
         ]);
 
         $records = GuestResponseEntry::query()
-            ->with(['branch:id,name,code', 'recordedBy:id,name,email'])
+            ->with(['branch:id,name,code', 'recordedBy:id,name,email', 'churchUnits:id,name,code,status'])
             ->where('church_id', $request->integer('church_id'))
             ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
             ->when($request->filled('entry_type'), fn (Builder $query) => $query->where('entry_type', $request->string('entry_type')->toString()))
@@ -62,6 +63,15 @@ class GuestResponseEntryController extends Controller
         ], 201);
     }
 
+    public function show(GuestResponseEntry $guestResponseEntry): JsonResponse
+    {
+        $guestResponseEntry->load(['branch:id,name,code', 'recordedBy:id,name,email', 'churchUnits:id,name,code,status']);
+
+        return response()->json([
+            'data' => $this->transformEntry($guestResponseEntry),
+        ]);
+    }
+
     public function update(UpdateGuestResponseEntryRequest $request, GuestResponseEntry $guestResponseEntry): JsonResponse
     {
         $entry = $this->persistEntry($guestResponseEntry, $request->validated());
@@ -74,28 +84,46 @@ class GuestResponseEntryController extends Controller
 
     private function persistEntry(GuestResponseEntry $entry, array $validated): GuestResponseEntry
     {
-        $entry->fill([
-            'church_id' => $validated['church_id'],
-            'branch_id' => $validated['branch_id'] ?? null,
-            'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
-            'entry_type' => $validated['entry_type'],
-            'full_name' => $validated['full_name'],
-            'phone' => $validated['phone'] ?? null,
-            'email' => $validated['email'] ?? null,
-            'gender' => $validated['gender'] ?? null,
-            'service_date' => $validated['service_date'],
-            'invited_by' => $validated['invited_by'] ?? null,
-            'address' => $validated['address'] ?? null,
-            'notes' => $validated['notes'] ?? null,
-        ]);
+        $wofbiLevels = $this->normalizeWofbiLevels($validated);
+        return DB::transaction(function () use ($entry, $validated, $wofbiLevels): GuestResponseEntry {
+            $entry->fill([
+                'church_id' => $validated['church_id'],
+                'branch_id' => $validated['branch_id'] ?? null,
+                'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
+                'entry_type' => $validated['entry_type'],
+                'full_name' => $validated['full_name'],
+                'phone' => $validated['phone'] ?? null,
+                'email' => $validated['email'] ?? null,
+                'gender' => $validated['gender'] ?? null,
+                'service_date' => $validated['service_date'],
+                'invited_by' => $validated['invited_by'] ?? null,
+                'address' => $validated['address'] ?? null,
+                'notes' => $validated['notes'] ?? null,
+                'foundation_class_completed' => (bool) ($validated['foundation_class_completed'] ?? false),
+                'baptism_completed' => (bool) ($validated['baptism_completed'] ?? false),
+                'holy_ghost_baptism_completed' => (bool) ($validated['holy_ghost_baptism_completed'] ?? false),
+                'wofbi_completed' => (bool) ($validated['wofbi_completed'] ?? false),
+                'wofbi_level' => ! empty($validated['wofbi_completed']) && ! empty($wofbiLevels) ? implode(', ', $wofbiLevels) : null,
+                'wofbi_levels' => ! empty($validated['wofbi_completed']) ? $wofbiLevels : null,
+            ]);
 
-        $entry->save();
+            $entry->save();
+            $entry->churchUnits()->sync($validated['church_unit_ids'] ?? []);
 
-        return $entry->load(['branch:id,name,code', 'recordedBy:id,name,email']);
+            return $entry->load(['branch:id,name,code', 'recordedBy:id,name,email', 'churchUnits:id,name,code,status']);
+        });
     }
 
     private function transformEntry(GuestResponseEntry $entry): array
     {
+        $wofbiLevels = $entry->wofbi_levels;
+
+        if (! is_array($wofbiLevels) || empty($wofbiLevels)) {
+            $wofbiLevels = $entry->wofbi_level
+                ? array_values(array_filter(array_map('trim', explode(',', $entry->wofbi_level))))
+                : [];
+        }
+
         return [
             'id' => $entry->id,
             'entry_type' => $entry->entry_type,
@@ -107,6 +135,18 @@ class GuestResponseEntryController extends Controller
             'invited_by' => $entry->invited_by,
             'address' => $entry->address,
             'notes' => $entry->notes,
+            'foundation_class_completed' => (bool) $entry->foundation_class_completed,
+            'baptism_completed' => (bool) $entry->baptism_completed,
+            'holy_ghost_baptism_completed' => (bool) $entry->holy_ghost_baptism_completed,
+            'wofbi_completed' => (bool) $entry->wofbi_completed,
+            'wofbi_level' => $entry->wofbi_level,
+            'wofbi_levels' => $wofbiLevels,
+            'church_units' => $entry->churchUnits->map(fn ($unit) => [
+                'id' => $unit->id,
+                'name' => $unit->name,
+                'code' => $unit->code,
+                'status' => $unit->status,
+            ])->values(),
             'branch' => $entry->branch ? [
                 'id' => $entry->branch->id,
                 'name' => $entry->branch->name,
@@ -119,5 +159,18 @@ class GuestResponseEntryController extends Controller
             ] : null,
             'created_at' => $entry->created_at,
         ];
+    }
+
+    private function normalizeWofbiLevels(array $validated): array
+    {
+        $levels = $validated['wofbi_levels'] ?? [];
+
+        if (! is_array($levels) || empty($levels)) {
+            $levels = ! empty($validated['wofbi_level']) ? [$validated['wofbi_level']] : [];
+        }
+
+        $levels = array_values(array_unique(array_filter(array_map('strval', $levels))));
+
+        return array_values(array_filter($levels, fn (string $level) => in_array($level, ['BCC', 'LCC', 'LDC'], true)));
     }
 }

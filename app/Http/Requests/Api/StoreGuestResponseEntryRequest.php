@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use App\Models\Branch;
+use App\Models\ChurchUnit;
 use App\Models\Church;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -31,6 +32,15 @@ class StoreGuestResponseEntryRequest extends FormRequest
             'invited_by' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
             'notes' => ['nullable', 'string', 'max:1000'],
+            'foundation_class_completed' => ['nullable', 'boolean'],
+            'baptism_completed' => ['nullable', 'boolean'],
+            'holy_ghost_baptism_completed' => ['nullable', 'boolean'],
+            'wofbi_completed' => ['nullable', 'boolean'],
+            'wofbi_level' => ['nullable', 'string', Rule::in(['BCC', 'LCC', 'LDC'])],
+            'wofbi_levels' => ['nullable', 'array'],
+            'wofbi_levels.*' => ['string', Rule::in(['BCC', 'LCC', 'LDC'])],
+            'church_unit_ids' => ['nullable', 'array'],
+            'church_unit_ids.*' => ['integer', Rule::exists(ChurchUnit::class, 'id')],
         ];
     }
 
@@ -40,6 +50,7 @@ class StoreGuestResponseEntryRequest extends FormRequest
             $churchId = $this->integer('church_id');
             $branchId = $this->integer('branch_id');
             $recordedByUserId = $this->integer('recorded_by_user_id');
+            $churchUnitIds = array_values(array_filter(array_map('intval', $this->input('church_unit_ids', []))));
 
             if (! $churchId) {
                 return;
@@ -65,6 +76,21 @@ class StoreGuestResponseEntryRequest extends FormRequest
                 if (! $userBelongsToChurch) {
                     $validator->errors()->add('recorded_by_user_id', 'Select a user that belongs to this church.');
                 }
+            }
+
+            if (! empty($churchUnitIds)) {
+                $validUnitCount = ChurchUnit::query()
+                    ->where('church_id', $churchId)
+                    ->whereIn('id', $churchUnitIds)
+                    ->count();
+
+                if ($validUnitCount !== count(array_unique($churchUnitIds))) {
+                    $validator->errors()->add('church_unit_ids', 'Select church units that belong to this church.');
+                }
+            }
+
+            if ($this->boolean('wofbi_completed') && ! $this->filled('wofbi_level') && empty($this->input('wofbi_levels', []))) {
+                $validator->errors()->add('wofbi_levels', 'Select at least one completed WOFBI level.');
             }
         });
     }
