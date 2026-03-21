@@ -39,15 +39,28 @@ class LfcJahiDirectorySeeder extends Seeder
         $districts = $payload['districts'] ?? [];
         $defaultAdminPassword = (string) data_get($payload, 'defaults.adminPassword', '12345678');
         $defaultLeaderPassword = (string) data_get($payload, 'defaults.homecellLeaderPassword', '12345678');
+        $defaultHomecellScheduleLocked = (bool) data_get($payload, 'defaults.homecellScheduleLocked', false);
         $defaultHomecellMeetingDay = (string) data_get($payload, 'defaults.homecellMeetingDay', 'Saturday');
         $defaultHomecellMeetingTime = (string) data_get($payload, 'defaults.homecellMeetingTime', '17:00');
+        $defaultHomecellMonthlyDates = array_values(array_unique((array) data_get($payload, 'defaults.homecellMonthlyDates', [])));
 
         BranchTag::ensureDefaults();
 
         $createdAt = Carbon::createFromFormat('d/m/Y', (string) ($churchData['created'] ?? now()->format('d/m/Y')))
             ->startOfDay();
 
-        $church = $this->upsertChurch($churchData, $pastorData, $settings, $createdAt);
+        $church = $this->upsertChurch(
+            $churchData,
+            $pastorData,
+            $settings,
+            [
+                'locked' => $defaultHomecellScheduleLocked,
+                'default_day' => $defaultHomecellMeetingDay,
+                'default_time' => $defaultHomecellMeetingTime,
+                'monthly_dates' => $defaultHomecellMonthlyDates,
+            ],
+            $createdAt
+        );
         $admin = $this->upsertAdmin($church, $adminData, $defaultAdminPassword, $createdAt);
         $this->syncServiceSchedules($church, $services, $createdAt);
 
@@ -160,7 +173,7 @@ class LfcJahiDirectorySeeder extends Seeder
         }
     }
 
-    private function upsertChurch(array $churchData, array $pastorData, array $settings, Carbon $createdAt): Church
+    private function upsertChurch(array $churchData, array $pastorData, array $settings, array $homecellSchedule, Carbon $createdAt): Church
     {
         $church = Church::query()->firstOrNew([
             'code' => (string) ($churchData['code'] ?? 'LFCJAHI-AERIPO'),
@@ -180,6 +193,10 @@ class LfcJahiDirectorySeeder extends Seeder
             'pastor_email' => $pastorData['email'] ?? null,
             'finance_enabled' => (bool) ($settings['financeTracking'] ?? false),
             'special_services_enabled' => (bool) ($settings['specialServices'] ?? false),
+            'homecell_schedule_locked' => (bool) ($homecellSchedule['locked'] ?? false),
+            'homecell_default_day' => $homecellSchedule['default_day'] ?? null,
+            'homecell_default_time' => $homecellSchedule['default_time'] ?? null,
+            'homecell_monthly_dates' => $homecellSchedule['monthly_dates'] ?? [],
             'status' => $churchData['status'] ?? 'active',
         ]);
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreHomecellRequest;
 use App\Http\Requests\Api\UpdateHomecellRequest;
 use App\Models\Branch;
+use App\Models\Church;
 use App\Models\Homecell;
 use App\Models\HomecellLeader;
 use App\Models\User;
@@ -58,13 +59,21 @@ class HomecellController extends Controller
         $validated = $request->validated();
 
         $homecell = DB::transaction(function () use ($validated): Homecell {
+            $church = Church::query()->findOrFail($validated['church_id']);
+            $meetingDay = $church->homecell_schedule_locked
+                ? ($church->homecell_default_day ?: ($validated['meeting_day'] ?? null))
+                : ($validated['meeting_day'] ?? null);
+            $meetingTime = $church->homecell_schedule_locked
+                ? ($church->homecell_default_time ?: ($validated['meeting_time'] ?? null))
+                : ($validated['meeting_time'] ?? null);
+
             $homecell = Homecell::create([
                 'church_id' => $validated['church_id'],
                 'branch_id' => $validated['branch_id'] ?? null,
                 'name' => $validated['name'],
                 'code' => ($validated['code'] ?? null) ?: $this->generateCode($validated['name']),
-                'meeting_day' => $validated['meeting_day'] ?? null,
-                'meeting_time' => $validated['meeting_time'] ?? null,
+                'meeting_day' => $meetingDay,
+                'meeting_time' => $meetingTime,
                 'host_name' => $validated['host_name'] ?? null,
                 'host_phone' => $validated['host_phone'] ?? null,
                 'city_area' => $validated['city_area'] ?? null,
@@ -98,12 +107,20 @@ class HomecellController extends Controller
         $validated = $request->validated();
 
         $homecell = DB::transaction(function () use ($validated, $homecell): Homecell {
+            $church = $homecell->church()->first();
+            $meetingDay = $church && $church->homecell_schedule_locked
+                ? ($church->homecell_default_day ?: ($validated['meeting_day'] ?? null))
+                : ($validated['meeting_day'] ?? null);
+            $meetingTime = $church && $church->homecell_schedule_locked
+                ? ($church->homecell_default_time ?: ($validated['meeting_time'] ?? null))
+                : ($validated['meeting_time'] ?? null);
+
             $homecell->update([
                 'branch_id' => $validated['branch_id'] ?? null,
                 'name' => $validated['name'],
                 'code' => ($validated['code'] ?? null) ?: $homecell->code ?: $this->generateCode($validated['name']),
-                'meeting_day' => $validated['meeting_day'] ?? null,
-                'meeting_time' => $validated['meeting_time'] ?? null,
+                'meeting_day' => $meetingDay,
+                'meeting_time' => $meetingTime,
                 'host_name' => $validated['host_name'] ?? null,
                 'host_phone' => $validated['host_phone'] ?? null,
                 'city_area' => $validated['city_area'] ?? null,
@@ -126,7 +143,7 @@ class HomecellController extends Controller
     private function relations(): array
     {
         return [
-            'church:id,name,code',
+            'church:id,name,code,homecell_schedule_locked,homecell_default_day,homecell_default_time,homecell_monthly_dates',
             'branch:id,name,code',
             'leaders.user:id,name,email,phone,role',
             'leaders:id,homecell_id,user_id,name,role,phone,email,is_primary,sort_order',
@@ -135,12 +152,20 @@ class HomecellController extends Controller
 
     private function transformHomecell(Homecell $homecell): array
     {
+        $scheduleLocked = (bool) ($homecell->church?->homecell_schedule_locked);
+        $meetingDay = $scheduleLocked && $homecell->church?->homecell_default_day
+            ? $homecell->church->homecell_default_day
+            : $homecell->meeting_day;
+        $meetingTime = $scheduleLocked && $homecell->church?->homecell_default_time
+            ? $homecell->church->homecell_default_time
+            : $homecell->meeting_time;
+
         return [
             'id' => $homecell->id,
             'name' => $homecell->name,
             'code' => $homecell->code,
-            'meeting_day' => $homecell->meeting_day,
-            'meeting_time' => $homecell->meeting_time,
+            'meeting_day' => $meetingDay,
+            'meeting_time' => $meetingTime,
             'host_name' => $homecell->host_name,
             'host_phone' => $homecell->host_phone,
             'city_area' => $homecell->city_area,
@@ -151,6 +176,13 @@ class HomecellController extends Controller
                 'id' => $homecell->church->id,
                 'name' => $homecell->church->name,
                 'code' => $homecell->church->code,
+            ] : null,
+            'schedule_config' => $homecell->church ? [
+                'locked' => $scheduleLocked,
+                'default_day' => $homecell->church->homecell_default_day,
+                'default_time' => $homecell->church->homecell_default_time,
+                'monthly_dates' => $homecell->church->homecell_monthly_dates ?? [],
+                'inherited' => $scheduleLocked,
             ] : null,
             'branch' => $homecell->branch ? [
                 'id' => $homecell->branch->id,

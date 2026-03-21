@@ -24,6 +24,10 @@ class Church extends Model
         'pastor_email',
         'finance_enabled',
         'special_services_enabled',
+        'homecell_schedule_locked',
+        'homecell_default_day',
+        'homecell_default_time',
+        'homecell_monthly_dates',
         'status',
     ];
 
@@ -32,6 +36,8 @@ class Church extends Model
         return [
             'finance_enabled' => 'boolean',
             'special_services_enabled' => 'boolean',
+            'homecell_schedule_locked' => 'boolean',
+            'homecell_monthly_dates' => 'array',
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UpdateHomecellScheduleRequest;
 use App\Http\Requests\Api\UpdateChurchProfileRequest;
 use App\Http\Requests\Api\UpdateServiceScheduleRequest;
 use App\Http\Requests\Api\UpdateChurchSetupRequest;
@@ -101,6 +102,36 @@ class ChurchController extends Controller
         return response()->json([
             'message' => 'Service schedule updated successfully.',
             'data' => $result,
+        ]);
+    }
+
+    public function updateHomecellSchedule(UpdateHomecellScheduleRequest $request, Church $church): JsonResponse
+    {
+        $schedule = $request->validated()['homecell_schedule'];
+
+        $church = DB::transaction(function () use ($church, $schedule): Church {
+            $church->update([
+                'homecell_schedule_locked' => (bool) $schedule['locked'],
+                'homecell_default_day' => $schedule['default_day'] ?? null,
+                'homecell_default_time' => $schedule['default_time'] ?? null,
+                'homecell_monthly_dates' => array_values(array_unique($schedule['monthly_dates'] ?? [])),
+            ]);
+
+            if ($church->homecell_schedule_locked && $church->homecell_default_day && $church->homecell_default_time) {
+                $church->homecells()->update([
+                    'meeting_day' => $church->homecell_default_day,
+                    'meeting_time' => $church->homecell_default_time,
+                ]);
+            }
+
+            return $church->fresh()->load(['users', 'serviceSchedules']);
+        });
+
+        return response()->json([
+            'message' => 'Homecell schedule updated successfully.',
+            'data' => [
+                'church' => $church,
+            ],
         ]);
     }
 

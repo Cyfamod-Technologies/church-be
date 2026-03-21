@@ -51,8 +51,10 @@
   "defaults": {
     "adminPassword": "12345678",
     "homecellLeaderPassword": "12345678",
+    "homecellScheduleLocked": true,
     "homecellMeetingDay": "Saturday",
-    "homecellMeetingTime": "17:00"
+    "homecellMeetingTime": "17:00",
+    "homecellMonthlyDates": []
   },
   "districts": [
     {
