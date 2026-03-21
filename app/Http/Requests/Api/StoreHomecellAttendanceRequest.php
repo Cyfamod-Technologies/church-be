@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\Church;
 use App\Models\Homecell;
 use App\Models\HomecellAttendanceRecord;
+use App\Support\HomecellScheduleGate;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -48,7 +49,7 @@ class StoreHomecellAttendanceRequest extends FormRequest
                 return;
             }
 
-            $homecell = Homecell::query()->with('branch:id')->find($homecellId);
+            $homecell = Homecell::query()->with(['branch:id', 'church:id,homecell_schedule_locked,homecell_monthly_dates'])->find($homecellId);
 
             if (! $homecell || $homecell->church_id !== $churchId) {
                 $validator->errors()->add('homecell_id', 'Select a homecell that belongs to this church.');
@@ -76,6 +77,14 @@ class StoreHomecellAttendanceRequest extends FormRequest
                 ->whereDate('meeting_date', $this->input('meeting_date'))
                 ->exists()) {
                 $validator->errors()->add('meeting_date', 'This homecell already has an attendance record for the selected date.');
+            }
+
+            if ($this->filled('meeting_date') && $homecell->church) {
+                $scheduleMessage = HomecellScheduleGate::validationMessage($homecell->church, $this->input('meeting_date'));
+
+                if ($scheduleMessage) {
+                    $validator->errors()->add('meeting_date', $scheduleMessage);
+                }
             }
         });
     }

@@ -7,11 +7,19 @@ use App\Models\Homecell;
 use App\Models\HomecellAttendanceRecord;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class HomecellAttendanceApiTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function tearDown(): void
+    {
+        Carbon::setTestNow();
+
+        parent::tearDown();
+    }
 
     public function test_homecell_attendance_can_be_recorded(): void
     {
@@ -254,5 +262,92 @@ class HomecellAttendanceApiTest extends TestCase
             'total_count' => 30,
             'notes' => 'Updated record.',
         ]);
+    }
+
+    public function test_homecell_attendance_can_only_be_added_for_the_next_locked_schedule_date(): void
+    {
+        Carbon::setTestNow('2026-03-21 10:00:00');
+
+        $church = Church::factory()->create([
+            'homecell_schedule_locked' => true,
+            'homecell_monthly_dates' => ['2026-03-22', '2026-03-29'],
+        ]);
+
+        $user = User::factory()->create([
+            'church_id' => $church->id,
+            'role' => 'church_admin',
+        ]);
+
+        $homecell = Homecell::create([
+            'church_id' => $church->id,
+            'name' => 'Hope Cell',
+            'status' => 'active',
+        ]);
+
+        $response = $this->postJson('/api/homecell-attendance', [
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-21',
+            'male_count' => 8,
+            'female_count' => 10,
+            'children_count' => 2,
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['meeting_date']);
+
+        $this->postJson('/api/homecell-attendance', [
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-22',
+            'male_count' => 8,
+            'female_count' => 10,
+            'children_count' => 2,
+        ])->assertCreated();
+    }
+
+    public function test_existing_homecell_attendance_record_can_still_be_edited_after_the_locked_date_passes(): void
+    {
+        Carbon::setTestNow('2026-03-30 10:00:00');
+
+        $church = Church::factory()->create([
+            'homecell_schedule_locked' => true,
+            'homecell_monthly_dates' => ['2026-03-29'],
+        ]);
+
+        $user = User::factory()->create([
+            'church_id' => $church->id,
+            'role' => 'church_admin',
+        ]);
+
+        $homecell = Homecell::create([
+            'church_id' => $church->id,
+            'name' => 'River Cell',
+            'status' => 'active',
+        ]);
+
+        $record = HomecellAttendanceRecord::create([
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-22',
+            'male_count' => 7,
+            'female_count' => 9,
+            'children_count' => 1,
+            'total_count' => 17,
+        ]);
+
+        $this->putJson('/api/homecell-attendance/'.$record->id, [
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-22',
+            'male_count' => 10,
+            'female_count' => 11,
+            'children_count' => 2,
+        ])->assertOk()
+            ->assertJsonPath('data.total_count', 23);
     }
 }

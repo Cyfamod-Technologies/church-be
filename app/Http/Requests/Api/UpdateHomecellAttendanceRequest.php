@@ -5,6 +5,7 @@ namespace App\Http\Requests\Api;
 use App\Models\Branch;
 use App\Models\Church;
 use App\Models\Homecell;
+use App\Support\HomecellScheduleGate;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -55,7 +56,7 @@ class UpdateHomecellAttendanceRequest extends FormRequest
                 return;
             }
 
-            $homecell = Homecell::query()->find($homecellId);
+            $homecell = Homecell::query()->with('church:id,homecell_schedule_locked,homecell_monthly_dates')->find($homecellId);
 
             if (! $homecell || $homecell->church_id !== $churchId) {
                 $validator->errors()->add('homecell_id', 'Select a homecell that belongs to this church.');
@@ -76,7 +77,14 @@ class UpdateHomecellAttendanceRequest extends FormRequest
                     $validator->errors()->add('recorded_by_user_id', 'Select a user that belongs to this church.');
                 }
             }
+            
+            if ($meetingDate && $homecell->church && $meetingDate !== $record->meeting_date?->toDateString()) {
+                $scheduleMessage = HomecellScheduleGate::validationMessage($homecell->church, $meetingDate);
 
+                if ($scheduleMessage) {
+                    $validator->errors()->add('meeting_date', $scheduleMessage);
+                }
+            }
         });
     }
 }
