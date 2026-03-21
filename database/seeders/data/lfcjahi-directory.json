@@ -1,0 +1,3454 @@
+{
+  "directoryVersion": 2,
+  "church": {
+    "status": "active",
+    "created": "20/03/2026",
+    "name": "LFC Jahi",
+    "code": "LFCJAHI-AERIPO",
+    "state": "FCT",
+    "city": "JAHI",
+    "districtArea": "Bwari",
+    "address": "JAHI",
+    "email": "admin@lfcjahi.com",
+    "phone": "08066298572",
+    "pastorInCharge": {
+      "fullName": "pst david bamgboye",
+      "phone": "+2348066298573",
+      "email": "david@gmail.com"
+    }
+  },
+  "primaryAdmin": {
+    "fullName": "Incrisz",
+    "email": "admin@lfcjahi.com",
+    "phone": "+2348066298571",
+    "password": "12345678"
+  },
+  "settings": {
+    "financeTracking": false,
+    "specialServices": true
+  },
+  "services": {
+    "sundayCount": 3,
+    "sundayTimes": [
+      "06:45",
+      "08:45",
+      "10:45"
+    ],
+    "wednesdayEnabled": true,
+    "wednesdayTime": "17:00",
+    "woseEnabled": true,
+    "woseTimes": {
+      "wednesday": "17:00",
+      "thursday": "17:00",
+      "friday": "17:00"
+    },
+    "customServices": []
+  },
+  "branchTags": [
+    "District",
+    "Zone"
+  ],
+  "defaults": {
+    "adminPassword": "12345678",
+    "homecellLeaderPassword": "12345678",
+    "homecellMeetingDay": "Saturday",
+    "homecellMeetingTime": "17:00"
+  },
+  "districts": [
+    {
+      "sortOrder": 1,
+      "name": "JOY",
+      "coverageAreas": "Katampe Estate, Katampe, Festrut Estate, Gishiri",
+      "homeCellPastors": [
+        "Pastor Ernest Abegbe (07040403541)",
+        "Pastor Bright Frank Nwana (08104161165)"
+      ],
+      "homeCellMinister": "Bro. Philip Aule (08166122764)",
+      "outreachPastor": "Pastor Ernest Abegbe (07040403541)",
+      "outreachMinister": "Pastor Bright Frank Nwana (08104161165)",
+      "outreachLocation": "Katampe Estate, Opp. LFC, Jahi",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Goshen",
+          "zoneMinister": "Bro. Stephen Omale (08173465500)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Zion",
+              "address": "Church Premises",
+              "minister": "Bro Ugbede Paul",
+              "phone": "09068469222"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Success",
+              "address": "Flat 5, Blk 9, Katampe Estate phase 2",
+              "minister": "Bro Abel",
+              "phone": "07031360693"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Open Heaven",
+              "address": "No 32, Festrut Est. Katampe B/4 Aso Radio",
+              "minister": "Sis. Ogechi Ajare",
+              "phone": "08036715681"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Peace and Love",
+              "address": "Flat 4, Plot 1126, Katampe Estate",
+              "minister": "Bro. Stephen Omale",
+              "phone": "08173465500"
+            },
+            {
+              "sortOrder": 5,
+              "name": "New Realm",
+              "address": "14, Green House, Festrut Est., behind Aso Radio, Katampe",
+              "minister": "Bro. Ikenna Ndubuisi",
+              "phone": "08032844160"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Fruitful Vine",
+              "address": "Unit 3, Xcelsia Court, Katampe Main",
+              "minister": "Sis Ifedolapo Akinniyi",
+              "phone": "08023197879"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Divine Visitation",
+              "address": "Katampe Main, before Festrust Estate",
+              "minister": "Sis, Rita Yusuf",
+              "phone": "08034524930"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Victory",
+          "zoneMinister": "Bro. Ugbede Paul (09068469222)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "House of Wonders",
+              "address": "Plot 519, Katampe District, Opp. Unique Estate, Katampe",
+              "minister": "Dcns Gift Abegbe",
+              "phone": "08036407340"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Grace & Glory",
+              "address": "Plot 391, Opp. Unique Estate, Katampe",
+              "minister": "Bro Henry Smith",
+              "phone": "08060119897"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Gate of Heaven",
+              "address": "Plot 106, Blk 10, near ViceJoy Apartment, Katampe",
+              "minister": "Sis Funke Yakubu",
+              "phone": "08032849384"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Due Glory",
+              "address": "Behind Gishiri Police Station, Gishiri",
+              "minister": "Bro Imadu Uwe",
+              "phone": "08032962619"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Greater Glory",
+              "address": "Zone B05, Katampe near Unique Estate",
+              "minister": "Dcns. Clara Okporu",
+              "phone": "08101275228"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Divine Leading",
+              "address": "2, Iduwa Ogenyi Street, Mabushi Next Cash & Carry across",
+              "minister": "Dcns. Ada Ogenyi",
+              "phone": "08036241533"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Rehoboth",
+              "address": "13, Amazing Court Estate, Katampe",
+              "minister": "Bro. Ifeanyi Ofoma",
+              "phone": "08052250964"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 2,
+      "name": "PAUL",
+      "coverageAreas": "Jahi 2",
+      "homeCellPastors": [
+        "Pastor Matthew Adeyemi (08033667298)",
+        "Pastor Isaac Oluyomi fadere (08149576185)"
+      ],
+      "homeCellMinister": "Elder Samson Danjuma (08065685225)",
+      "outreachPastor": "Pastor Matthew Adeyemi (08033667298)",
+      "outreachMinister": "Pastor Isaac Oluyomi (08149576185)",
+      "outreachLocation": "LEA Primary School, Jahi 2",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Ephraim",
+          "zoneMinister": "Sis. Perpetual Unoke (07068523957)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Hossanah",
+              "address": "Behind the mosque Jahi 2",
+              "minister": "TBD",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Genesis",
+              "address": "By Chief Palace, Behind ECWA Jahi 2",
+              "minister": "Bro. Pius",
+              "phone": "08135526068"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Store House Blessing",
+              "address": "By Dunamis Church, Jahi 2",
+              "minister": "Sis. Perpetual",
+              "phone": "07068523457"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Heavenly Places",
+              "address": "By ECWA Church, Jahi 2",
+              "minister": "Bro Aaron Jacob",
+              "phone": "08052695596"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Way Maker",
+              "address": "By Jahi 2, Vigilante",
+              "minister": "Bro. Emmanuel",
+              "phone": "08119804440"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Mt. Zion",
+              "address": "By Burial Ground, Jahi 2",
+              "minister": "Sis. Kate Johnson",
+              "phone": "08035107983"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Turnaround",
+              "address": "Behind the big mosque Jahi 2",
+              "minister": "Sis. Perpetual",
+              "phone": "07068523457"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Crown of Glory",
+              "address": "Flt 10, Blk C Peace Apartment, Jahi 2",
+              "minister": "Sis. Amana",
+              "phone": "08169457759"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Honour",
+              "address": "Ma'Asipita",
+              "minister": "TBD",
+              "phone": "09097354401"
+            },
+            {
+              "sortOrder": 10,
+              "name": "Prince of Peace",
+              "address": "Jahi 2, Behind Sharp Corner",
+              "minister": "Sis. Goodness Enesi",
+              "phone": "08059498983"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Blessed",
+          "zoneMinister": "Bro. Adesina Akinyele (09080070023)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Everlasting Light",
+              "address": "By the Transformer, Jahi 2",
+              "minister": "Bro. Ifeanyi",
+              "phone": "08067176216"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Breakthrough",
+              "address": "By the Transformer, Jahi 2",
+              "minister": "Bro. Patrick",
+              "phone": "09021677402"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Signs & Wonders",
+              "address": "By Dunamis Church, Jahi 2",
+              "minister": "Bro. Afolabi",
+              "phone": "08135363861"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Rock of Ages",
+              "address": "Sharp Corner, Jahi 2",
+              "minister": "Bro. Ezechukwu",
+              "phone": "08115064925"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Praise",
+              "address": "Opposite Catholic Church, Jahi 2",
+              "minister": "Sis Ijeoma Onyebuchi",
+              "phone": "07032389668"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Good Treasure",
+              "address": "House 50, by Environmental, Jahi 2",
+              "minister": "Sis Ugochi",
+              "phone": "07031683860"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Perfect Peace",
+              "address": "Langtang Village, ",
+              "minister": "Dcn Azubuike",
+              "phone": "08162151645"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Overcomers",
+              "address": "Behind LEA Primary School, Jahi 2",
+              "minister": "Sis. Mary Benjamin",
+              "phone": "08063216787"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Fruitful Vine",
+              "address": "Behind Environmental office, Jahi 2",
+              "minister": "Bro. Joshua Omobude",
+              "phone": "08121714013"
+            },
+            {
+              "sortOrder": 10,
+              "name": "Divine Guidance",
+              "address": "TBD",
+              "minister": "Bro Steve",
+              "phone": "08102840946"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 3,
+      "name": "LOVE",
+      "coverageAreas": "Jahi 1, Kado Kuchi, Next Area",
+      "homeCellPastors": [
+        "Pastor Igho Anomohanran (08036744693)",
+        "Pastor Daniel Ikura Terseer (08138068300)"
+      ],
+      "homeCellMinister": "Dcn. Festus Olubodun (08097109954)",
+      "outreachPastor": "Pastor Igho Anomohanran (08036744693)",
+      "outreachMinister": "Pastor Daniel Ikura Terseer (08138068300)",
+      "outreachLocation": "Jahi 1 by Open Field",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Jehovah Rapha",
+          "zoneMinister": "Bro. Emmanuel Nnamuchi (08032752021)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Joy of the Lord",
+              "address": "Office space by Jahi 1",
+              "minister": "Bro Emmanuel",
+              "phone": "08038196337"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Solid Rock",
+              "address": "Adjacent Jahi 1 Police station",
+              "minister": "Bro Uche",
+              "phone": "08109099348"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Dew of Heaven",
+              "address": "Jahi 1, by Field",
+              "minister": "Bro Matthew",
+              "phone": "07030843887"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Store House Blessing",
+              "address": "Opp. The Redeemed Church Jahi 1",
+              "minister": "Bro Christian Danagogo",
+              "phone": "09094873346"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Due Glory",
+              "address": "Poultry road, after brick house, Jahi 1",
+              "minister": "Sis. Oyediya Anya",
+              "phone": "08038941938"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Double Portion",
+              "address": "Hse 55, Zone C, Jahi 1",
+              "minister": "Bro. Emmanuel Nnamuchi",
+              "phone": "08032752021"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Wonder Place",
+              "address": "Spring Garden School, behind Jahi 1 Plaza, ",
+              "minister": "Bro Sunday Frank",
+              "phone": "08136296562"
+            },
+            {
+              "sortOrder": 8,
+              "name": "House of Encounter",
+              "address": "Behind chairman borehole, Jahi 1",
+              "minister": "Sis Ujunwa Anaedum",
+              "phone": "08037027496"
+            },
+            {
+              "sortOrder": 9,
+              "name": "The Light of God",
+              "address": "Behind Jahi Clinic, Jahi 1",
+              "minister": "Bro Ikpongakarase Anana",
+              "phone": "08030510230"
+            },
+            {
+              "sortOrder": 10,
+              "name": "Joy Place",
+              "address": "By poultry, Jahi 1",
+              "minister": "Mrs Abraham",
+              "phone": "08060014989"
+            },
+            {
+              "sortOrder": 11,
+              "name": "Hephzibah",
+              "address": "Hse 5, Behind Goodluck Estate, Jahi 1, ",
+              "minister": "Bro Patrick Ewomazino Wadahi",
+              "phone": "08030654377"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Jehovah Rohi",
+          "zoneMinister": "Bro. Andrew Awolowo (08037339806)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "God is Light",
+              "address": "Behind Chief Palace Jahi 1",
+              "minister": "TBD",
+              "phone": "08133260960"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Defended City",
+              "address": "House Along Calabar Kitchen Road, Kado Kuchi. ",
+              "minister": "Mr Afolabi",
+              "phone": "08053352505"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Inspiration",
+              "address": "By Jahi 1 Field",
+              "minister": "Sis. Efe",
+              "phone": "08034119882"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Peaceful Habitation",
+              "address": "Behind Ice-Block Factory",
+              "minister": "Bro Benjamin",
+              "phone": "08039599067"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Zion",
+              "address": "Lapanoma",
+              "minister": "Bro. Okechukwu",
+              "phone": "08133382717"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Awesome God",
+              "address": "Ice Block Junction, Jahi 1",
+              "minister": "Bro. Obogo John",
+              "phone": "08101612156"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Gladness",
+              "address": "TBD",
+              "minister": "Sis Esther",
+              "phone": "09037890096"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 4,
+      "name": "ISAAC",
+      "coverageAreas": "Katampe Extension, CEC Qtrs, Dawaki Hillside",
+      "homeCellPastors": [
+        "Pastor Bofede Okporu (08034994542)"
+      ],
+      "homeCellMinister": "Dcn. Seyi Oni (08037037515)",
+      "outreachPastor": "Pastor Bofede Okporu (08034994542)",
+      "outreachMinister": "Dcn. Seyi Oni (08037037515)",
+      "outreachLocation": "Katampe Extension by Oando Filling Station",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Judea",
+          "zoneMinister": "Bro. Julius (09090444450, 08033815481)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "God's Favour",
+              "address": "Plt 3016, CEC Qtrs Beside CEC Office, After AA Rano Filling Station, Katampe",
+              "minister": "Sis. Ayo Adeola Adeojo",
+              "phone": "07038122394"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Judah",
+              "address": "Ecowas Estate, Katampe. ",
+              "minister": "Bro. Valentine",
+              "phone": "08102601376"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Excellence",
+              "address": "10,Jubril Aminu Crescent, Katampe",
+              "minister": "Bro. Nathaniel",
+              "phone": "08137725649"
+            },
+            {
+              "sortOrder": 4,
+              "name": "House of Majesty",
+              "address": "Hse 1c, Oladunni Ayandipo Close, Katampe Extension Abuja",
+              "minister": "TBD",
+              "phone": "07034775556"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Perfection",
+          "zoneMinister": "Bro. Seyi Kayode (08039308003)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Israel",
+              "address": "6 Chukwuma Okoye Str. Dawaki Hills",
+              "minister": "Dcn. Seyi Kayode",
+              "phone": "08039308003"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Delightsome",
+              "address": "Plot 68, Cadastral B08, Jahi District. ",
+              "minister": "Dcn. Seyi Oni",
+              "phone": "08037037515"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Salem",
+              "address": "7 Linus Ozoagu Str. Dawaki Hills",
+              "minister": "Mrs. Victoria Ayafa",
+              "phone": "08064357857"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 5,
+      "name": "SHILOH",
+      "coverageAreas": "Kado Estate, Phase 1",
+      "homeCellPastors": [
+        "Pastor Sunny Nkemdi (08067644743)"
+      ],
+      "homeCellMinister": "Dcns. Ajagbusi Toyin (08036061169)",
+      "outreachPastor": "Pst Sunny Nkemdi (08067644743)",
+      "outreachMinister": "Dcns. Ajagbusi Toyin (08036061169)",
+      "outreachLocation": "Next Cash & Carry/Nippon Hotel Junction, Jahi",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Jehovah Nissi",
+          "zoneMinister": "Dcns. Helen Ibezim (08034503790)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Revelation",
+              "address": "Hse. 23, 1st Avenue, Kado, Phase 1",
+              "minister": "Sis. Jemimah",
+              "phone": "07017426542"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Sanctified",
+              "address": "TBD",
+              "minister": "TBD",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Covenant",
+              "address": "46, Flt C, Jahi 1, Over the Valley",
+              "minister": "Bro Peter Chijioke",
+              "phone": "08035876393"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Solomon",
+              "address": "Hse 12, 323 Road, Isa Koto Str, Kado Estate, Phase 1",
+              "minister": "Elder Nsude",
+              "phone": "08177668601"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Well Spring",
+              "address": "TBD",
+              "minister": "TBD",
+              "phone": "—"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Divine Favour",
+          "zoneMinister": "Sis. Nene Isah (08036110904)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Thanksgiving",
+              "address": "11 Crescent, Hse 69, Kado, Phase 1",
+              "minister": "Mrs Chibuzor",
+              "phone": "08032847038"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Jesse",
+              "address": "TBD",
+              "minister": "Sis. Chinenye",
+              "phone": "08095574811"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Throne of Grace",
+              "address": "Hse 121, 12 Cres. Kado Estate. ",
+              "minister": "Sis Ifeoma",
+              "phone": "08070468204"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Covenant of Peace",
+              "address": "Hse 11, Rd 23, Kado Estate, Phase 1. ",
+              "minister": "Mrs Daikwo",
+              "phone": "08035876393"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Gilgal",
+              "address": "Hse 2, 21 Rd., Kado Estate. ",
+              "minister": "Bro Henry",
+              "phone": "07045087462"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Fruitful Vine",
+              "address": "Jahi 1",
+              "minister": "Mrs Omotayo Alabi",
+              "phone": "08064940797"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 6,
+      "name": "POWER",
+      "coverageAreas": "Kado Estate, Phase 2",
+      "homeCellPastors": [
+        "Pastor Sunny Nkemdi (08067644743)"
+      ],
+      "homeCellMinister": "Dcn. Matthew M. Dauda (08037767922)",
+      "outreachPastor": "Dcn. Matthew M. Dauda (08037767922)",
+      "outreachMinister": "-",
+      "outreachLocation": "-",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Shalom",
+          "zoneMinister": "Miss. Brenda Njoku (09093948878)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "God Head",
+              "address": "Plot G6, Cad Zone, Custom Qtrs, Kado Kuchi, ",
+              "minister": "Bro. Benjamin O. ",
+              "phone": "08036056146"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Jair",
+              "address": "6, Ahmed Jordan Crescent, Kado Estate",
+              "minister": "Mr Francis",
+              "phone": "08089634325"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Overcomer",
+              "address": "Kado Phase 2, Plot 299 beside Jostos Apartments",
+              "minister": "Dcn Jimmy U",
+              "phone": "08032148954"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Zion",
+              "address": "Jahi 1 Clinic",
+              "minister": "Bro Desmond",
+              "phone": "07037987937"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Strong Refuge",
+              "address": "5, Joseph Calabar Street, by Transformer, Jahi 1",
+              "minister": "Sis. Stella",
+              "phone": "08068324014"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Godly Heritage",
+              "address": "Off Katampe Road, by Angwa fulani",
+              "minister": "Mrs. Bridget Ikpe",
+              "phone": "07036281366"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Abundant",
+              "address": "Bsides Naval Qtrs, Blk 271",
+              "minister": "Mrs Peter",
+              "phone": "08165015904"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Pearl",
+              "address": "Flat 1, White House Zone, Jahi 1",
+              "minister": "Sis. Mercy",
+              "phone": "08166131526"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Ebenezer",
+              "address": "TBD",
+              "minister": "Sis Ruth Okeh",
+              "phone": "08174396077"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Corner Stone",
+          "zoneMinister": "Bro. Akinlolu Afolabi (07056504657)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Divine Rescue",
+              "address": "Plot 923, Jahi District Estate",
+              "minister": "Mr Sirus Mopol",
+              "phone": "08106622562"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Wonder Double",
+              "address": "Living Faith Cashew Settlement, Kado Phase 2",
+              "minister": "Mrs. Mercy Solomom",
+              "phone": "08125570501"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Peace",
+              "address": "Cashew Settlmt Gilmor Site, Kado Phase 2",
+              "minister": "Mr. Barnabas",
+              "phone": "08147522322"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Holiness",
+              "address": "Cashew Village, Kado 3",
+              "minister": "Sis. Ngozi Ufomadu",
+              "phone": "09060349143"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Manifestation",
+              "address": "Plot 923, Jahi District Estate",
+              "minister": "Bro. Douglas",
+              "phone": "08166995734"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Majesty",
+              "address": "Behind Gilmor Company, 4C97+PCF, Jahi",
+              "minister": "Mrs Ajagun",
+              "phone": "09136605687"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Glory",
+              "address": "Zone BO8, Plot 2680, Jahi, Gilmor Cad Zone",
+              "minister": "Mrs. Olasetemi Daniel",
+              "phone": "08037079274"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Voice of God",
+              "address": "Cashew Center, Jahi District",
+              "minister": "Mr. Nathaniel",
+              "phone": "08127478603"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Mountain Mover",
+              "address": "Cashew Center, Jahi District",
+              "minister": "Mrs. Bridget Gideon",
+              "phone": "08126960500"
+            },
+            {
+              "sortOrder": 10,
+              "name": "Divine Presence",
+              "address": "Cashew Center, Jahi District",
+              "minister": "Bro Monday Nicholas",
+              "phone": "08145358669"
+            },
+            {
+              "sortOrder": 11,
+              "name": "Miracle Worker",
+              "address": "Cashew Center, Jahi District",
+              "minister": "Mrs Eunuice Bem",
+              "phone": "08032952336"
+            },
+            {
+              "sortOrder": 12,
+              "name": "Great Provider",
+              "address": "Cashew Center, Jahi District",
+              "minister": "Mrs Helen Madu",
+              "phone": "08127478663"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 7,
+      "name": "TIMOTHY",
+      "coverageAreas": "Maitama",
+      "homeCellPastors": [
+        "Pastor Atukpa Dakuru (08033424790)",
+        "Pastor Ohiozoba Ehiede (08036514915)"
+      ],
+      "homeCellMinister": "Bro. Yemi fabiyi (08065444645)",
+      "outreachPastor": "Pastor Atukpa Dakuru (08033424790)",
+      "outreachMinister": "Pastor Ohiozoba Ehiede (08036514915)",
+      "outreachLocation": "Gana Street, Maitama",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Honour",
+          "zoneMinister": "Dcns. Azibanye Atukpa (07031806982)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Evergreen",
+              "address": "9, Danube Str. Off IBB Boulevard, Maitama",
+              "minister": "Dcns. Azibanye Atukpa",
+              "phone": "07031806982"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Dearly Beloved",
+              "address": "Model Secondary Sch. IBB Rd, Maitama",
+              "minister": "Sis Mwuese Ann",
+              "phone": "08034524610"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Peaceful Habitation",
+              "address": "Blk 6, Flt 10, Foreign Affairs Qtrs, off Limpopo Street, Loire Crescent Estate, FHA, Maitama",
+              "minister": "Mrs Mary Jackson",
+              "phone": "07068140235"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Great Grace",
+              "address": "5, Igbeti Rock Street, Maitama Extension Iwari Fynface Oba",
+              "minister": "TBD",
+              "phone": "08088209927"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Integrity",
+          "zoneMinister": "Dcns. Adedokun Abosede (08055601431)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Unfailing Tribe",
+              "address": "11, Nouachott Str., Wuse Zone 1",
+              "minister": "Mrs Bukola Ifabiyi",
+              "phone": "07034546590"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Mountain of Holiness",
+              "address": "13 Uruguay Str., Maitama. ",
+              "minister": "Dcns. A. Abosede",
+              "phone": "08055601431"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 8,
+      "name": "ASSURANCE",
+      "coverageAreas": "Wuse 2, Wuse & environs",
+      "homeCellPastors": [
+        "Pastor James Bright Ahmed (08037780240)",
+        "Pastor Sunday Iliya (07037615200)"
+      ],
+      "homeCellMinister": "Bro. Koye Thomas (08060433128)",
+      "outreachPastor": "Pst. James Bright Ahmed (08037780240)",
+      "outreachMinister": "Pastor Sunday Illiya (07037615200)",
+      "outreachLocation": "Wuse, by Banex",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Faith",
+          "zoneMinister": "Dcns. Bridget Olorunfemi (08037006738)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Era of Glory",
+              "address": "16 Alexandria Cres., Behind Banex Plaza, Wuse 2",
+              "minister": "Bro. Orlando",
+              "phone": "08063630785"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Overflow",
+              "address": "182, Aminu Kano Crescent, Wuse 2",
+              "minister": "Sis. Zipporah",
+              "phone": "07039214664"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Glorious Crown",
+              "address": "43 Parakou Crescent, Wuse 2",
+              "minister": "Sis. Binta",
+              "phone": "08137696969"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Triumph",
+              "address": "Shop E4, Emabs Adjacent Eko bank, Wuse 2",
+              "minister": "Bro. Super Samuel",
+              "phone": "08056337430"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Comfort",
+              "address": "5, Ajoke Crescent, Wuse Zone 1",
+              "minister": "Rabath Samuel",
+              "phone": "08072146635"
+            },
+            {
+              "sortOrder": 6,
+              "name": "New Things",
+              "address": "Custom Qtrs, Behind EFCC",
+              "minister": "Mrs Halilu",
+              "phone": "08169359747"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Solution Centre",
+              "address": "Wuse Zone 6, 19, Mbani Street",
+              "minister": "Sis. Edith",
+              "phone": "07055557443"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Fortune",
+              "address": "12, Ndjamena Crescent, Custom Qtrs Wuse 2",
+              "minister": "Mrs Vivien Ayesha",
+              "phone": "08164849076"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Hope",
+          "zoneMinister": "Dcns. Lilian Olayinka (08038144468)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Marvellous Help",
+              "address": "42 Kigoma str. Wuse Zone 1",
+              "minister": "Nwosu Rosemary",
+              "phone": "07054175997"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Mercy Glorious",
+              "address": "Mbaneni Str., Wuse Zone 6",
+              "minister": "Mercy Akamgbo",
+              "phone": "08068132728"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Mountain of Fat things",
+              "address": "Utako Market, Stb4, 8 Blessed Line",
+              "minister": "Sis. Anieze",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Overflowing Joy",
+              "address": "7B, Yalinga Street, Wuse 2",
+              "minister": "Ms Oyedepo T.",
+              "phone": "08064819599"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 9,
+      "name": "EL-SHADDAI",
+      "coverageAreas": "Works & Housing Estate and Gwarinpa Village, Gwarinpa",
+      "homeCellPastors": [
+        "Pastor Adekoya A. Adewale (07063192089)"
+      ],
+      "homeCellMinister": "Dcn. Henry Eleibigha (08063043099)",
+      "outreachPastor": "",
+      "outreachMinister": "",
+      "outreachLocation": "",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Amazing Grace",
+          "zoneMinister": "Sis. Precious Kanayo Omonoju (08033120717)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "The Rewarder",
+              "address": "26, Rwam Pam Str, 2nd gate, FMWH, Gwarinpa. ",
+              "minister": "Sis. Bose Odewumi",
+              "phone": "08037160166"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Fountain of Love",
+              "address": "18, Sultan Abubakar, 1st gate FMWH, ",
+              "minister": "Sis. Precious K. Omonoju",
+              "phone": "08033120717"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Wisdom",
+          "zoneMinister": "Bro. Kingsley Ekoh (08065650956)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Great and Mighty",
+              "address": "Gwarinpa Village, 2nd Gate Works & Housing Estate Gwarimpa",
+              "minister": "TBD",
+              "phone": "—"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 10,
+      "name": "JOSEPH",
+      "coverageAreas": "3rd Ave, War College, 35 & 39 Rd",
+      "homeCellPastors": [
+        "Pst. Omisore Olubukola (07034486649)"
+      ],
+      "homeCellMinister": "Bro. Emma Amedu (08035924303)",
+      "outreachPastor": "-",
+      "outreachMinister": "-",
+      "outreachLocation": "-",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "City of David",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Eleazar",
+              "address": "Hse. 42, 35 Road Gwarimpa",
+              "minister": "Sis. Chidera",
+              "phone": "08058433300"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Throne of Grace",
+              "address": "13 JJ Okocha Str. Off 3rd Ave. Gwarimpa",
+              "minister": "Bro Fred Adogo",
+              "phone": "08060498668"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Divine Breakthrough",
+              "address": "39 Rd, Gwarimpa",
+              "minister": "Mrs. Mercy Edime",
+              "phone": "08029135572"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Ebenezer",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Jethro",
+              "address": "Flat 2 NDC Qtrs.' Akure Street, War collejge Housing Estate, Gwarimpa",
+              "minister": "Dcns. Flora Omisore",
+              "phone": "08035950845"
+            },
+            {
+              "sortOrder": 2,
+              "name": "New Strength",
+              "address": "10 Asaba Str. War College, Gwarimpa",
+              "minister": "Sis Lydia Amedu",
+              "phone": "08036165306"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Victorious Army",
+              "address": "Hse. 3, Bauchi Street, War College Qtrs.",
+              "minister": "Sis. Abigail Joseph",
+              "phone": "08035867067"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Divine Refuge",
+              "address": "TBD",
+              "minister": "Sis Oloba",
+              "phone": "07030513667"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 11,
+      "name": "ABRAHAM",
+      "coverageAreas": "1st Avenue Gwarinpa Estate",
+      "homeCellPastors": [
+        "Pastor Rotimi Popoola (08038332258)"
+      ],
+      "homeCellMinister": "Dcn. Nelson Ogbaji (08037877544)",
+      "outreachPastor": "Pst. Rotimi Popoola (08038332258)",
+      "outreachMinister": "Dcn. Nelson Ogbaji (08037877544)",
+      "outreachLocation": "1st Avenue, Gwarimpa",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Rose of Sharon",
+          "zoneMinister": "Dcns. Cocodia Rita (08130296263)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Manifestation",
+              "address": "Blk 31, 111 Road, Gwarinpa",
+              "minister": "Dns. Florence Avbayeru",
+              "phone": "08065517502"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Ever Winning",
+              "address": "Hse 28, Road 13,Off 1st Ave, Gwarinpa",
+              "minister": "Bro. Charles Ezenwoye",
+              "phone": "07066200893"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Mountain of Mercy",
+              "address": "Hse 1, 321 Rd, Behind Grabbo Medical Center, Off 3rd Ave, Gwarimpa",
+              "minister": "Dcns Popoola Atinuke",
+              "phone": "08067338387"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Jehovah Nissi",
+              "address": "Blk 9, 5th Ave., Gwarimpa Estate, Abuja",
+              "minister": "Dcns Agnes Odey",
+              "phone": "08109716077"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Zion",
+          "zoneMinister": "Dcns. Helen Bestowe (08059577740)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "God with us",
+              "address": "C18, Rd 21, Cornershop Gwarimpa II Abuja",
+              "minister": "Mrs Ibe",
+              "phone": "08067270048"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Cloud of Glory",
+              "address": "Flat A, Blk 3, N Close, Off 1st Ave, Gwa",
+              "minister": "Sist. Suzy Nathan",
+              "phone": "08035895720"
+            },
+            {
+              "sortOrder": 3,
+              "name": "God's Love",
+              "address": "Blk 1, Flt F, N. Close",
+              "minister": "Sis. Patience O.",
+              "phone": "08055838377"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Kingdom",
+              "address": "1, Amb. Aiging, Foreign Affairs Qtrs, gwarimpa",
+              "minister": "Sis. Alice Kuni",
+              "phone": "08034853985"
+            },
+            {
+              "sortOrder": 5,
+              "name": "God's Delight",
+              "address": "5, James Brown, 14 road, Gwarimpa",
+              "minister": "Sis. Genevieve Ada Okereke",
+              "phone": "08035638412"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Fortune",
+              "address": "LEA Primary School, Kado Binko, 1st Ave., Gwarimpa Abuja",
+              "minister": "Sis Faith",
+              "phone": "07069058396"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 12,
+      "name": "DOMINION",
+      "coverageAreas": "2nd Ave, 211 Rd & Pacesetter School, Gwarinpa",
+      "homeCellPastors": [
+        "Pastor Iboro Johnny (08028317742)"
+      ],
+      "homeCellMinister": "Dcn Wale Olubajo (08034218545)",
+      "outreachPastor": "Pastor Iboro Johnny (08028317742)",
+      "outreachMinister": "Dcn Wale Olubajo (08034218545)",
+      "outreachLocation": "2nd Avenue, Gwarimpa",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Obed",
+          "zoneMinister": "Bro Osagie Isibor (07038790738)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Rehoboth",
+              "address": "No 7, Wole Soyinka Avenue, 2nd Avenue, Gwarimpa. ",
+              "minister": "Bro. Osagie Isibor",
+              "phone": "07038790738"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Restoration",
+              "address": "Beside I.C. World, 2nd Avenue, Gwarimpa. ",
+              "minister": "Sis Serah",
+              "phone": "—"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Restoration",
+          "zoneMinister": "Bro Osagie Isibor (07038790738)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Great Faith",
+              "address": "Adjacent I.C. World, 2nd Avenue, Gwarimpa. ",
+              "minister": "Mrs Elizabeth Harmony",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Jewel",
+              "address": "Hse 3, 57 Road, 5th Ave, Gwarinpa",
+              "minister": "Dcns. Aiyeniko F.",
+              "phone": "08033141498"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Unlimited Breakthrough",
+              "address": "Off 141 Rd, off 2nd Ave, Gwarimpa",
+              "minister": "TBD",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Kings Court",
+              "address": "B Close, 5th Ave., Gwarimpa",
+              "minister": "Sis Sandra Anih",
+              "phone": "08168609770"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 13,
+      "name": "GLORY",
+      "coverageAreas": "4th Avenue Gwarinpa Estate",
+      "homeCellPastors": [
+        "Pastor Eva Greg (08033299793)",
+        "Pastor Mobolaji Sanni (08022225528)"
+      ],
+      "homeCellMinister": "Dcn. Joseph Edwin (09026979217)",
+      "outreachPastor": "Pastor Eva Greg (08033299793)",
+      "outreachMinister": "Dcn.Joseph Edwin (09026979217)",
+      "outreachLocation": "4th Avenue, Gwarimpa",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Praise",
+          "zoneMinister": "Bro. David Kuni (08036698645)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Divine Rescue",
+              "address": "Shop 12, Bonny B Corner Shop , 4th Avenue",
+              "minister": "Ifeyinwa Amadiokere",
+              "phone": "08066056617"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Judah",
+          "zoneMinister": "Bro Chris Ovili (08065179975)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Eliezer",
+              "address": "Block 5, Flt C, FHSE Setraco",
+              "minister": "Dcns Omotese Eva",
+              "phone": "08056420522"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Divine Lifting",
+              "address": "Plot 8A,Blk14,Fed. Site & Service Layout. ",
+              "minister": "Sis. Salome Dandam",
+              "phone": "08034069832"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Anointing",
+              "address": "Hse 4, Flt C, 4th Av., Setraco",
+              "minister": "Dcns Obadofin",
+              "phone": "08035046398"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 14,
+      "name": "OMEGA",
+      "coverageAreas": "Citec Villa & Adkan Estates",
+      "homeCellPastors": [
+        "Pastor Frank Uanikhiba (08035903976)"
+      ],
+      "homeCellMinister": "Bro. Emmanuel Oloba (08038196337)",
+      "outreachPastor": "Pastor Frank Uanikhiba (08035903976)",
+      "outreachMinister": "Bro. John-Mark Etoh (08032557269)",
+      "outreachLocation": "Citec Villa & Adkan Estate",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Jotham",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Revelation",
+              "address": "Hse. 10, 442 Rd, Citec Villa, Gwarinpa",
+              "minister": "Mrs Apata",
+              "phone": "08037014779"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Praise",
+              "address": "Citec, Gwarimpa. ",
+              "minister": "Bro Joseph Jimoh",
+              "phone": "07065063984"
+            },
+            {
+              "sortOrder": 3,
+              "name": "City of refuge",
+              "address": "Plot 177E, 441 Cres, Citec villas, Gwar",
+              "minister": "Mrs David Vandi",
+              "phone": "08059458775"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Mercy",
+              "address": "46 Crescent off 4th Ave, Gwarinpa",
+              "minister": "Mrs Oduoye",
+              "phone": "08033581052"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Caleb",
+          "zoneMinister": "Bro David Omotilewa (08036512944)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Divine",
+              "address": "6932 Rd, Galadima, Adkan Estate",
+              "minister": "Bro.David Motilewa",
+              "phone": "08036512944"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Breakthrough",
+              "address": "4th Avenue, Gwarimpa",
+              "minister": "Dcns. Chinyere",
+              "phone": "08066114777"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 15,
+      "name": "RHEMA",
+      "coverageAreas": "6th Ave, 69 Rd, Adkan Est.",
+      "homeCellPastors": [
+        "Pastor Okezie Nwankwo (08033325320)"
+      ],
+      "homeCellMinister": "Dcns. Patience Katchy (08035951263)",
+      "outreachPastor": "Pastor Okezie Nwankwo (08033325320)",
+      "outreachMinister": "Dcns. Patience Katchy (08035951263)",
+      "outreachLocation": "6th Avenue, Gwarimpa",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Great Kings",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Peculiar Treasure",
+              "address": "Hse. 6, A Crescent, off 69 Rd Adkan estate",
+              "minister": "Bro. Dozie Katchy",
+              "phone": "08169876728"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Disciples",
+              "address": "Hse. 56, 693 Rd, off 69 Rd, Galadima, Adkan Estate",
+              "minister": "Sis. Evelyn Echem F.",
+              "phone": "08033158461"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Faith Tabernacle",
+              "address": "69, 21A Rd, Off 69 Rd, Galadima, Adkan Estate",
+              "minister": "Dcns. Love Chibuzo",
+              "phone": "08033145713"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Favour",
+              "address": "Plot 3, Shekin Close, Adkan Estate 1, Gwarimpa",
+              "minister": "Mrs Inyeobong Iboro Johnny",
+              "phone": "07013532484"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Due Time",
+          "zoneMinister": "Bro. Godswill Nwudu (08033779887)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Anointed",
+              "address": "Hse. 4, 69(A) 9 Rd. Gwarinpa. ",
+              "minister": "Sis. Adaeze Katchy",
+              "phone": "07069793309"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Great Things",
+              "address": "D8 Aliyu Kama Street, Sunshine Estate",
+              "minister": "Dcns O. Shodunke",
+              "phone": "08033181752"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Solution Center",
+              "address": "Key Special School premises, Gwarimpa",
+              "minister": "Mrs Blessing Salami",
+              "phone": "09033317261"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Fat & Flourishing",
+              "address": "Hse A46, B Rd., Saraha security Estate, Gwarimpa",
+              "minister": "Dcns. Anita Ibrahim",
+              "phone": "07068853966"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Eternal Glory",
+              "address": "11, Sen. John Azumbata Str., Andikan Beulah Est, Ph 2. Gwarimpa",
+              "minister": "Mrs . Lilian Inyang I.",
+              "phone": "08146969838"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 16,
+      "name": "ALPHA",
+      "coverageAreas": "Karasana, Gwarinpa",
+      "homeCellPastors": [
+        "Pastor Afam J. Osemeke (08033432324)"
+      ],
+      "homeCellMinister": "Dcn. Effiong Ekerendu (08130678887)",
+      "outreachPastor": "Pastor Afam J. Osemeke (08033432324)",
+      "outreachMinister": "Dcn. Effiong Ekerendu (08130678887)",
+      "outreachLocation": "Karasana, Gwarimpa",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Siloam",
+          "zoneMinister": "Bro. Austine Obule (07036504599)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Breakthrougth",
+              "address": "Plot 668, Queens Estate, Karasana, Gwar. ",
+              "minister": "Sis. Precious",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Supernatural Light",
+              "address": "Plot 595 Queens Estate, Karasana, Gwar. ",
+              "minister": "Sis. Joy Okhaifoh",
+              "phone": "08034921150"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Asher",
+              "address": "Hse 14, Road 541, 5th Ave, Gwarinpa",
+              "minister": "Bro. Jo Ariemu",
+              "phone": "08035062035"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Thanksgiving",
+              "address": "Plot 302, Queens Estate, Karasana, Gwar. ",
+              "minister": "Bro.Oyebade James",
+              "phone": "08033194130"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Hephzibah",
+              "address": "Plot A26, Saraha Home Security Estate, Gwarinpa",
+              "minister": "Dcns Olayemi Nwankwo",
+              "phone": "07038084900"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Bethany",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Good Portion",
+              "address": "House No 13, 1st Avenue Jenew Homes Estate Karsana Gwarinpa",
+              "minister": "Dcns. Osemeke Bola. ",
+              "phone": "08053060827"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Fountain of Love",
+              "address": "Blk 12, Flat 6, Aso Garden Estate, Karsana, Gwarinpa",
+              "minister": "Host: Mr. & Mrs. Emmanuel",
+              "phone": "08066766363"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Divine Health",
+              "address": "No. 1, Brazil Close, Efab Metropolies Estate, Gwarinpa Ext. ",
+              "minister": "Host: Mr. & Mrs. F. Asine",
+              "phone": "08035114504"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Greater Grace",
+              "address": "No. 3, Georgia Street, by Chief Fabian Nwaora Avenue, Efab Metropolies  Estate, Gwarinpa Ext.",
+              "minister": "Bro Sunny Ubua",
+              "phone": "08033129778"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 17,
+      "name": "PETER",
+      "coverageAreas": "Dawaki Village 2/Extension/Dutse",
+      "homeCellPastors": [
+        "Pastor Kufreobong Akpan (08034336522)"
+      ],
+      "homeCellMinister": "Bro. Isaac Isa (08035990746)",
+      "outreachPastor": "Pastor Kufreobong Akpan (08034336522)",
+      "outreachMinister": "Dcn. Sayo Akerele (08036446833)",
+      "outreachLocation": "Okada Junction, Dawaki",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Nathaniel",
+          "zoneMinister": "Bro. Odey Friday (08139131336)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Corner Stone",
+              "address": "5, Gabon Rd, Washington Str., Efab Metropolis Estate, Karsana Abuja",
+              "minister": "David Ihenyen",
+              "phone": "08130951797"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Hope of Glory",
+              "address": "1, Jude Nwagu Close, Harmony Estate, Dawaki",
+              "minister": "Dcns Abiodun Akanji",
+              "phone": "07031196797"
+            },
+            {
+              "sortOrder": 3,
+              "name": "King David",
+              "address": "29, Abiodun Uwadia Str., Ushafa, Abuja",
+              "minister": "Dcns Modupe Akerele",
+              "phone": "08028544166"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Kingdom Heritage",
+              "address": "7 Agboola Shonekan str,Ushafa,Bwari, Abuja. ",
+              "minister": "Bro Seyi Olorundare",
+              "phone": "08098460634"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Saviour Abode",
+              "address": "32, Peace ave, zone 7, Dutse Alhaji",
+              "minister": "Bro Isaac Isa",
+              "phone": "08035990746"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Manifold Wisdom",
+              "address": "Hse 8, Dutse Zone 4, opp. God's Star Academy",
+              "minister": "Bro. Ode Friday Adekpe",
+              "phone": "08139131336"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Excellent Wisdom",
+              "address": "29, S. Agada Crescent, off Juliet Academy way, Dawaki, Abuja",
+              "minister": "Dcns. Etimbuk Akpan",
+              "phone": "08028528199"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Living Proof",
+              "address": "141 panaf drive by multiple grace assembly, zone 7 Dutse Alhaji . ",
+              "minister": "Bro Promise",
+              "phone": "08064474239"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Divine Favour",
+              "address": "7, Obasanjo Hse, Flt 4, Rd 170, CAC Zone 6, Dutse Alhaji . ",
+              "minister": "Bro. Tayo Martins",
+              "phone": "07038533908"
+            },
+            {
+              "sortOrder": 10,
+              "name": "More Than Conqueror",
+              "address": "7, Upper Hill Street, Zone 7, Monkey Village, Dutse Alhaji. ",
+              "minister": "Bro. Frank Akpan",
+              "phone": "08136296562"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Benjamin",
+          "zoneMinister": "Sis. Esther Emuobor (07035855801)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Exceeding Grace",
+              "address": "Hse 3, Wilfried Oleribe Str, Dutse Dawaki Extension",
+              "minister": "Bro Zimuzon Prince",
+              "phone": "08135526235"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Revival",
+              "address": "6, Comoros Str., EFAB Metropolis, Karsana, Dawaki, abuja",
+              "minister": "Mrs Patience Momoh",
+              "phone": "08028761180"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Lord Jesus Reign",
+              "address": "7, Zone 1 Extension, Dutse Alhaji, Dawaki",
+              "minister": "Sis Peace Chukwuemeka",
+              "phone": "08063587005"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Mighty Seed",
+              "address": "Polt 396, Barr Aliyu Loko Str, I Pent 7 Estste, Karsana, Abuja",
+              "minister": "Bro. James Adakole",
+              "phone": "08097395020"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Moriah",
+              "address": "141, Wilfred Oleribe Str., Dawaki, Abuja",
+              "minister": "Bro Bukola Okewole",
+              "phone": "08176328408"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Voice Of The Lord",
+              "address": "9, Kingsley Str., Dawaki Model City, Yellow Gate, Dawaki",
+              "minister": "Sis. Emuobor Esther",
+              "phone": "07035855801"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Hepzibah",
+              "address": "5, Hillary Emezue Link, Model City Yellow Gate, Sawaki",
+              "minister": "Dr Ifeoma Orogade",
+              "phone": "08035045692"
+            },
+            {
+              "sortOrder": 8,
+              "name": "God's Center",
+              "address": "9, Okey Nwanyawu Str, Zone 6, Before Catherina School",
+              "minister": "Mrs Kehinde David",
+              "phone": "07036675434"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 18,
+      "name": "JAMES",
+      "coverageAreas": "Dawaki",
+      "homeCellPastors": [
+        "Pastor Abel Eromon (08030692500)",
+        "Pastor David Olayemi (08036420144)"
+      ],
+      "homeCellMinister": "Deacon Sayo Akerele (08036446833)",
+      "outreachPastor": "Pastor Abel Eromon (08030692500)",
+      "outreachMinister": "Pastor David Olayemi (08036420144)",
+      "outreachLocation": "Dawaki",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Bethesda",
+          "zoneMinister": "Bro. David Ihenyen (08130951797)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Glorious Supernatural Flight",
+              "address": "No. 4 Mobolaji Sanni Street, Dawaki",
+              "minister": "Mrs Olubukola Akinpelu",
+              "phone": "08033819358"
+            },
+            {
+              "sortOrder": 2,
+              "name": "House of Glory",
+              "address": "Plot T20, Panaf Drive, by Pantaker, Dawaki",
+              "minister": "Mrs. Emmanuella Frank",
+              "phone": "07039049313"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Gate of Samaria",
+              "address": "No.3, Nwagu Close, Harmony Estate, Dawaki",
+              "minister": "Mrs. Agnes Seyi O.",
+              "phone": "07064255075"
+            },
+            {
+              "sortOrder": 4,
+              "name": "El-Shaddai",
+              "address": "Hillproid. James Gwani Str., No 1, Daniel Gwani Close, Hill Field Homes, Dawaki",
+              "minister": "Dcns Divine Gwani",
+              "phone": "08066411129"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Gilgal",
+          "zoneMinister": "Sis. Chinwe-Obi Ohaeri (07038297343)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Good Measure",
+              "address": "Plot 181 Dawaki Extension",
+              "minister": "Dcn P. I. Oyewole",
+              "phone": "07035911722"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Wave of Glory",
+              "address": "Plot 218, Opp Kelross Academy Dawaki Extension",
+              "minister": "Sis Azuka Favour",
+              "phone": "07068701902"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Good Treasure",
+              "address": "Trans-Engineering Layout Dawaki",
+              "minister": "Sis. Chinwe-Obi Ohaeri",
+              "phone": "07038297343"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Exceeding Fruitful",
+              "address": "Plot 6, CAD Zone 7, off Ajiroba Drive by Dawaki Modern Market",
+              "minister": "Bro Paul Tyokosu",
+              "phone": "07034333837"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Hephzibah",
+              "address": "Plot C17, Dawaki Ext., Opp. St. James Catholic Church, Dawaki",
+              "minister": "Bro Fortune",
+              "phone": "08066190884"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Excellence",
+              "address": "9, Off Ajiroba Rd, Dawaki Village",
+              "minister": "Bro. Steve Abiodun",
+              "phone": "08066087851"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Shephard House",
+              "address": "No. 11, Ogweche Nathaniel Str., Dawaki",
+              "minister": "Bro Marvins",
+              "phone": "08095777249"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Chosen Generation",
+              "address": "Hse 93, Palm Estate, Dawaki",
+              "minister": "Mrs Tayo David Kehinde",
+              "phone": "08033475498"
+            },
+            {
+              "sortOrder": 9,
+              "name": "His Dwelling Place",
+              "address": "House 15, Winners Way, Dawaki",
+              "minister": "Bro Lucky Ediale",
+              "phone": "08038684148"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 19,
+      "name": "BREAKING LIMITS",
+      "coverageAreas": "Dawaki",
+      "homeCellPastors": [
+        "Pastor Gwani James (08064315748)",
+        "Pastor Sola Aledare (08067169873)"
+      ],
+      "homeCellMinister": "TBD",
+      "outreachPastor": "Pastor Gwani James (08064315748)",
+      "outreachMinister": "Pastor Sola Aledare (08067169873)",
+      "outreachLocation": "Awa Plaza, Dawaki",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Hossanah",
+          "zoneMinister": "Bro. Nonso Ubah (08035511944)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Empowered",
+              "address": "Plot 1260 Trans- Engineering Layout Dawaki",
+              "minister": "Bro. Chijioke Ugwu",
+              "phone": "08105621588"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Throne of Mercy",
+              "address": "2 De Albert Close, Trans-Engineering, Dawaki",
+              "minister": "Mrs. Princewill Albert",
+              "phone": "07063372745"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Manifold Wisdom",
+              "address": "No5, James Garba Crescent, Trans Engineering Estate, Dawaki",
+              "minister": "Bro Shola Ajimati",
+              "phone": "08066507432"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Flourishing",
+              "address": "House 11, Niger Barrack, Asokoro",
+              "minister": "Bro. Nonso Ubah",
+              "phone": "08035511944"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Shining Light",
+              "address": "13, Trans Engineering estate, 2nd gate. ",
+              "minister": "Sis. Omotayo Giwa",
+              "phone": "08078488818"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Land of Promise",
+              "address": "15, Grace Community Estate, Dawaki",
+              "minister": "Dcns Rosita Okebe",
+              "phone": "—"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Salem",
+          "zoneMinister": "Bro. Emma Onajomo (08060664930)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Fresh Oil",
+              "address": "13, Oguche Obe Street, Dawaki Extension",
+              "minister": "Dcns Ijeoma Dada",
+              "phone": "08136790872"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 20,
+      "name": "ENLARGEMENT",
+      "coverageAreas": "NAF Valley, AYA, Asokoro, Guzape",
+      "homeCellPastors": [
+        "Pastor Edward Godwin Owin (08037017838)",
+        "Pastor Adama G.A. (07062553557)"
+      ],
+      "homeCellMinister": "Dcn. Jacob Nwazota (07034989935)",
+      "outreachPastor": "Pst Edward Godwin Owin (08037017838)",
+      "outreachMinister": "Dcn. Jacob Nwazota (07034989935)",
+      "outreachLocation": "Kpaduma Market, Asokoro",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Mercy",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Fruitful Land",
+              "address": "NAF Valley Estate, Asokoro",
+              "minister": "Dcn Pius Oahimire",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Oil of Gladness",
+              "address": "Hse 28, Zakari Close, NAF Valley Estate",
+              "minister": "Mrs Aileru Abosede",
+              "phone": "07031064196"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Good Report",
+              "address": "TBD",
+              "minister": "TBD",
+              "phone": "—"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Manifestation",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Breaking Limits",
+              "address": "House 1B, Paradise Estate, Guzape",
+              "minister": "Dcns. Nwazota Nkechi",
+              "phone": "08023171111"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Exceptional Land",
+              "address": "TBD",
+              "minister": "TBD",
+              "phone": "—"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 21,
+      "name": "TRIUMPHANT",
+      "coverageAreas": "Maitama Extension, Mpape Katampe 1, 2, 3 & Eneje",
+      "homeCellPastors": [
+        "Pastor Eno Eno Eyoung (08033144529)"
+      ],
+      "homeCellMinister": "Bro. Victor Nnorom (07030905080)",
+      "outreachPastor": "Pastor Eno Eno Eyoung (08033144529)",
+      "outreachMinister": "Bro. Victor Nnorom (07030905080)",
+      "outreachLocation": "By Oceanic Bank, Mpape",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Peace",
+          "zoneMinister": "Bro. Dominique James (09058449392)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Honour",
+              "address": "Maitama Extension",
+              "minister": "Bro. Abiodun",
+              "phone": "08065457181"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Restoration",
+              "address": "Eneje",
+              "minister": "Sis Nkechi",
+              "phone": "07035125320"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Praise",
+              "address": "Maitama Extension",
+              "minister": "Sis. Lilian",
+              "phone": "08036145036"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Everlasting Love",
+              "address": "Off Medford Hospital, Mpape",
+              "minister": "Sis. Grace Adeleye",
+              "phone": "08038139232"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Flourishing Company",
+              "address": "House T11, Jubilation Estate, Maitama 2, Mpape",
+              "minister": "Mrs F. Aramude",
+              "phone": "08029958959"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Covenant",
+          "zoneMinister": "Bro. Abiodun Imadojemu (08065457181)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Joyfulness",
+              "address": "Katampe 1",
+              "minister": "Bro. Abiodun Imadojemu",
+              "phone": "08065457181"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Abundant Grace",
+              "address": "Mpape Katampe 1",
+              "minister": "Sis. Abiodun Joy",
+              "phone": "07033972180"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Mountain of Enlargement",
+              "address": "Katampe 2",
+              "minister": "Sis. Ann",
+              "phone": "08155678397"
+            },
+            {
+              "sortOrder": 4,
+              "name": "El-Bethel",
+              "address": "Katampe 2",
+              "minister": "Dcn Akpan Etim",
+              "phone": "08053464299"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Rehoboth",
+              "address": "Katampe 1, ",
+              "minister": "Sis. Cynthia",
+              "phone": "08036953808"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Redeemer",
+              "address": "Katampe 1, ",
+              "minister": "Sis. Kate Johnson",
+              "phone": "08039429714"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 22,
+      "name": "MARVELLOUS",
+      "coverageAreas": "Mpape Area 1, Ajegunle, Berger Quarry and Mashafa",
+      "homeCellPastors": [
+        "Pastor Eno Eno Eyoung (08033144529)"
+      ],
+      "homeCellMinister": "Bro. Victor Nnorom (07030905080)",
+      "outreachPastor": "-",
+      "outreachMinister": "-",
+      "outreachLocation": "-",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Grace",
+          "zoneMinister": "Sis. Kemi Omonaiye (07063450953)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Adonai",
+              "address": "Inside Delace Estate before Mountain of Fire Chuch",
+              "minister": "Sis. Martina Adebayo",
+              "phone": "08152837772, 08036527518"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Blessedness",
+              "address": "Behind Mpape Plaza, opposite Salavation Army Church",
+              "minister": "Bro. Innocent Edosomwan",
+              "phone": "08081147832"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Abounding Grace",
+              "address": "No. 30, Eliye Street, Phase 3 GRA,. Mpape",
+              "minister": "Bro. Austine Aunah",
+              "phone": "09027504511"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Mount Zion",
+              "address": " 589, GRA., Phase III, Mpape",
+              "minister": "Sis. Ruth Nkemjika",
+              "phone": "08085444786"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Spirit of Excellent",
+              "address": "Ojuelegba Street, 1st Borehole, Kerosene Junction, Ajegunle",
+              "minister": "Bro Godfrey Apav",
+              "phone": "08067366339"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Blessed Assurance",
+              "address": "Ajegunle Rd. by Blessed Chuks Pharmacy, 1st RCCG, Mpape",
+              "minister": "Bro. Samuel Audu",
+              "phone": "08134070583"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Everlasting Light",
+              "address": "Behind Gwari Market, GRA., Mpape",
+              "minister": "Sis. Beatrice Odey",
+              "phone": "08131212997"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Lily of the Valley",
+              "address": "Beside Deeper Life Church, Gwari Market, Ajegunle, Mpape",
+              "minister": "Bro. Lucky Alonge",
+              "phone": "08162000340"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Tree of Life",
+              "address": "GRA Mpape along Ajegunle Rd,. Opp Fire of God Gospel Church",
+              "minister": "Mr Fidelis Agabi",
+              "phone": "07035342937"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Glory Realm",
+          "zoneMinister": "Elder Michael Ekika (09046646011)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Safety Dwelling",
+              "address": "Lambamba Rd., Mpape",
+              "minister": "Mrs Obianuju Okorie",
+              "phone": "07030660274"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Way Maker",
+              "address": "Behind No. 11, St. John Street, Berger Quarry, Mpape",
+              "minister": "Bro Tagwai Ibrahim Kure",
+              "phone": "07030753504"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Showers of Blessings",
+              "address": "By Labamba Hotel, Berger Quarry, Mpape",
+              "minister": "Bro. Andrew Ohene",
+              "phone": "08181459571"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Joyful Noise",
+              "address": "Berger Quarry Rd., Back of New Labamba Hotel.",
+              "minister": "Sis Chioma Ifeanyichukwu",
+              "phone": "07034783699, 08093452599"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Abundant Life",
+              "address": "Berger Quarry Rd, first left turn after AEDC",
+              "minister": "Mr Omobayo Shobaloju",
+              "phone": "07061525407"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Living Waters",
+              "address": "1st Borehole, Dogo Block Area, Masafa Rd, Mpape",
+              "minister": "Mrs Chinyere Ejikeme",
+              "phone": "08034325155"
+            },
+            {
+              "sortOrder": 7,
+              "name": "All Round Rest",
+              "address": "Mpape New Police Station off Kenedy Udeh Rd, ",
+              "minister": "Bro Taiwo Julius",
+              "phone": "08069126037"
+            }
+          ]
+        },
+        {
+          "sortOrder": 3,
+          "name": "Rhema",
+          "zoneMinister": "Sis. Victoria Lawal (08148791113)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Father's Love",
+              "address": "Plot D684F, Mpape 2 Layout, Behind Crush Rock, Mpape",
+              "minister": "Bro. Emmanuel Martins",
+              "phone": "07068480757"
+            },
+            {
+              "sortOrder": 2,
+              "name": "All Round Fruitfulness",
+              "address": "Back of crush rock, after the filling station",
+              "minister": "Mrs Elizabeth Fidelis",
+              "phone": "07052370600"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Overcomer",
+              "address": "GRA by Happy Life",
+              "minister": "Sis. Ijeoma Ikpe",
+              "phone": "08186691060"
+            },
+            {
+              "sortOrder": 4,
+              "name": "The Good Shepherd",
+              "address": "Mpape 2 New Layout, behind crush rock, Mpape",
+              "minister": "Sis. Victoria Lawal",
+              "phone": "08148791113"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Wealthy Place",
+              "address": "Back of Crush Rock, Close to Filling Station",
+              "minister": "Sis. Ogechi Obi",
+              "phone": "08068223338"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Fat and Flourishing",
+              "address": "Eneje layout, adjacent Rovak Hotel",
+              "minister": "Elder Michael Uwhe",
+              "phone": "09046646011"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Sufficient Substance",
+              "address": "Adjacent Catholic Church, Glado Star Nur/Pry School",
+              "minister": "Bro. Michael Ilifu",
+              "phone": "08034428440"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Prince of Peace",
+              "address": "Eneje before First Bank, Mpape",
+              "minister": "Chidinma Chukwuezi",
+              "phone": "08069538536"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Covenant Highway",
+              "address": "LEA Primary School, Mpape",
+              "minister": "Bro Kenneth Saaondo",
+              "phone": "08146177277"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 23,
+      "name": "ETERNAL",
+      "coverageAreas": "Kubwa and Bazango Village",
+      "homeCellPastors": [
+        "Pastor John Olarewaju (08062631118)",
+        "Pastor Omozuafo Frank Amiomode (08135608640)"
+      ],
+      "homeCellMinister": "Elder Nwosu David (07038019557)",
+      "outreachPastor": "Pastor John Olarewaju (08062631118)",
+      "outreachMinister": "Pastor Omozuafo Frank Amiomode (08135608640)",
+      "outreachLocation": "2/1 Garden, by Recreation Park, Kubwa",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Next Level",
+          "zoneMinister": "Bro. Chukwujekwu Egwu ('08035806774)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Rivers of Joy",
+              "address": "Plot 14, 2nd Ave., Rd., behind Efobic Plaza, off Arab Road, Kubwa",
+              "minister": "Bro. Abbe Emmanuel",
+              "phone": "08037109953"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Salt of Life",
+              "address": "11, Levis Nnorom Street, Hillview Community Estate, Arab Rd, Kubwa",
+              "minister": "Dcns Oghenefejiro Benbella",
+              "phone": "08052067658"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Fresh Oil",
+              "address": "Gbazango Ext., by Yellow House, after Le Beni Academy, Kubwa. ",
+              "minister": "Eckson Lawrence D.",
+              "phone": "08036003102 '08033791493"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Wonder Double",
+              "address": "Back of Old Daughter of Charity after Destiny Center Church Pipeline Kubwa",
+              "minister": "Antonia Segun Yusuf",
+              "phone": "07034646224"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Prayer House",
+              "address": "23, Charles Ofoboche Street, Nupe Gbazango, Kubwa",
+              "minister": "Dcns. Tokula Victoria",
+              "phone": "08036117412"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Joy Overflow",
+          "zoneMinister": "Sis. Abigael Lawrence Eckson (08036003102)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Possibility",
+              "address": "2/1 Garden, behind Recreation Park, along 2/1 Police Station. ",
+              "minister": "Dcns. Kemi Fowora",
+              "phone": "08035970874"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Bowels of Mercy",
+              "address": "Blk 3, Flt 2, Police Affairs Qtrs, opp GTB, Gado Nasko Rd, Kubwa",
+              "minister": "Dcns Evangeline M. Nwosu",
+              "phone": "08027113980"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Great Favour",
+              "address": "Plot 22, 9, Mall Sidi close, Luleha Cresnt, off Hamza Abdullahi rd, Kubwa",
+              "minister": "Bro. Chukwujekwu Egwu",
+              "phone": "08035806774"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Sure Foundation",
+              "address": "Plot 99, Okitipupa Crescent, Phase 4, Kubwa",
+              "minister": "Magdalene Zibiry E.",
+              "phone": "08065333888"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Mighty Seed",
+              "address": "Okeha Close, 2/2 by Cupid Suites, Kubwa. ",
+              "minister": "Mrs Usman Penina Ede",
+              "phone": "08180567716"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 24,
+      "name": "REDEEMED",
+      "coverageAreas": "Kubwa, Bwari, Dutse",
+      "homeCellPastors": [
+        "Pastor Shehu Danjuma (08026694748)",
+        "Pastor Godwin Iheabunnike (08035899323)"
+      ],
+      "homeCellMinister": "Dcn. Dike Chimezie (08034727303)",
+      "outreachPastor": "Pastor Shehu Danjuma (08026694748)",
+      "outreachMinister": "Pastor Godwin Iheabunnike (08035899323)",
+      "outreachLocation": "Mobil Filling Station, Dutse",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Holy Flock",
+          "zoneMinister": "Dcn. John Johnson (08037018579)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Joy of Many generations",
+              "address": "3B, Mercy Ave. Pauliham Palms Garden Est, Off Roop Hotel Rd., Ph IV, Kubwa",
+              "minister": "Bro Joseph Ogunbiyi",
+              "phone": "08188418173"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Beloved",
+              "address": "Flat 9, No 6 Gado Nasco Rd by Soul Lounge Event Center, FHA, Kubwa. ",
+              "minister": "Bro. David Daniel",
+              "phone": "08135274003"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Pure Mind",
+              "address": "Flat 9, Baptist covenant estate army scheme Kubwa. ",
+              "minister": "Mrs. Bola Torru",
+              "phone": "08035512258"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Throne of Grace",
+              "address": "FHA Scheme, Kubwa",
+              "minister": "Bro. Sam Oyebade",
+              "phone": "08183971129"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Glorious",
+              "address": "1, Audu Oyigene Str., F01 Layout Kubwa",
+              "minister": "Bro. Harrison",
+              "phone": "08036010104"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Divine Favour",
+              "address": "Plot 447, Nkiruka Str., by Kubwa Orphanage Homes, F01 Kubwa",
+              "minister": "Dcn Johnson John",
+              "phone": "08037018579"
+            },
+            {
+              "sortOrder": 7,
+              "name": "TurnAround",
+              "address": "Sapphire Flats F01, Kubwa Ext., Beside Surestart Private School",
+              "minister": "TBD",
+              "phone": "—"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Arise and Shine",
+          "zoneMinister": "Bro Yerima (08062083325)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Rhema",
+              "address": "Plot 107, Zone D, Dutse Sokale layout",
+              "minister": "Dcns. Stella Dike",
+              "phone": "08051166144"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Divine Life",
+              "address": "No 9, Sambo Lai Str., Sagwari Layout, Dutse Makaranta",
+              "minister": "Bro. John Jubril",
+              "phone": "08039752998"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Fountain of Knowledge",
+              "address": "3, Chibok Street, SCC, Ushafa",
+              "minister": "Bro Ndrifeke Udosen",
+              "phone": "08125266261"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Signs and Wonders",
+              "address": "Opp. Holy Child Private Schl., Dutse, Boupkuma",
+              "minister": "Bro. Ibileye Oladimeji",
+              "phone": "08189705830"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Unending Love",
+              "address": "House 60 Success Avenue, Bmuko Dutse",
+              "minister": "Mrs Joy Omole",
+              "phone": "08037909344"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Covenant of Peace",
+              "address": "1, Atenaga close, by Dunamis Dutse Alhaji",
+              "minister": "Bro. Michael Oludare",
+              "phone": "08066443162"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Notable Miracle",
+              "address": "#15 Anglican Str, Obasanjo Road Dutse Baupman",
+              "minister": "Bro Femi Babalola",
+              "phone": "07063063001"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Glory Era",
+              "address": "FO1, Military Pension Board Rd, Dutse",
+              "minister": "Joy Dibia",
+              "phone": "08064667425"
+            }
+          ]
+        },
+        {
+          "sortOrder": 3,
+          "name": "Obededom",
+          "zoneMinister": "Col. Juliana Nkechi Umezurike (08037008725)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "House of Glory",
+              "address": "C124 Faith Ayodele Str., Ushafa Extension beside SCC Pipe Company, ",
+              "minister": "Bro. Sampson Ojima",
+              "phone": "07066167671"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Zion",
+              "address": "Blk 1A, Army Command and NAOWA Hospital Quarters",
+              "minister": "Miss Miracle",
+              "phone": "08165268716"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Blessed Among Nations",
+              "address": "Block F flat 6 Public Service Institute Kubwa expressway Abuja",
+              "minister": "Mrs Comfort Freddie",
+              "phone": "09022422772"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Mountain Moving Faith",
+              "address": "Dr\"s Quarters Army Command and NAOWA Hospital Block B Flat 5",
+              "minister": "Bro Chike Daniel",
+              "phone": "08138773868"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Fishers Of Men",
+              "address": "Pub. Service Institute Blk. D Flt. 6",
+              "minister": "Bro. Yerima",
+              "phone": "08062083325"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Overflowing Grace",
+              "address": "Blk 1A, Flt 8, Mambilla Barracks. ",
+              "minister": "Bro Mike Etop",
+              "phone": "—"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 25,
+      "name": "HEAVEN ON EARTH",
+      "coverageAreas": "EFAB Estate, Life Camp",
+      "homeCellPastors": [
+        "Pastor Kingsley Ehiaguina (08023573162)",
+        "Pastor Prosper Kachikwu (08035278260)"
+      ],
+      "homeCellMinister": "Dcn. Awa Kalu (08055245392)",
+      "outreachPastor": "Pastor Kingsley Ehiaguina (08023573162)",
+      "outreachMinister": "Pastor Prosper Kachikwu (08035278260)",
+      "outreachLocation": "Life Camp by Fish Market",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Israel",
+          "zoneMinister": "Mrs Grace R. Daniel (08097927064)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Prince of Peace",
+              "address": "Hse 16, 307 Road, Efab Estate, Life",
+              "minister": "Dcns Otuno Odion",
+              "phone": "08033872760"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Hebron",
+              "address": "Plot 297, Efab Estate, Life Camp",
+              "minister": "Mrs Grace Daniels",
+              "phone": "08097927064"
+            },
+            {
+              "sortOrder": 3,
+              "name": "God's Chosen",
+              "address": "House 8, B10 Street, Citec Estate, Mbora",
+              "minister": "Dcns Ada Kalu",
+              "phone": "08033112034"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Shining Light",
+              "address": "Plot 297, Efab Estate, Life Camp",
+              "minister": "Mr Pankyes Ishaya",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Flourish Court",
+              "address": "Efab Estate, Life Camp",
+              "minister": "Mr Amodu",
+              "phone": "08054408549"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Goshen",
+          "zoneMinister": "Bro. Chibuike Dike (07083592532)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Kings",
+              "address": "House 61, Zone 1,Hillview Estate",
+              "minister": "Dcns Adekoya",
+              "phone": "08035839289"
+            },
+            {
+              "sortOrder": 2,
+              "name": "God's Heritage",
+              "address": "20, Milverton Road, Brains & Hammers",
+              "minister": "Sis. Precious",
+              "phone": "07062247502"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Faithful Steward",
+              "address": "Plot 59, Cadastral zone LifeCamp",
+              "minister": "Mrs Josephine Oluagwai",
+              "phone": "07032471809"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 26,
+      "name": "ISRAEL",
+      "coverageAreas": "Mabushi, Utako, Wuye",
+      "homeCellPastors": [
+        "Pastor Darlen Kumswa (08033117436)",
+        "Pastor Ezechukwu Charles D. (08033730929)"
+      ],
+      "homeCellMinister": "Dcn Gabriel Adeyemo (08055834677)",
+      "outreachPastor": "Pastor Dalen P Kumswa (08033117436)",
+      "outreachMinister": "Dcn Gabriel Adeyemo (08055834677)",
+      "outreachLocation": "Mabushi by Police Station",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Living Waters",
+          "zoneMinister": "Dcns Alice Adeyemo (08036310042)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Perfect Holiness",
+              "address": " 20, IBM Haruna Street, Utako, Abuja",
+              "minister": "Bro.Oreoluwa Olayemi",
+              "phone": "08101660322"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Evergreen",
+              "address": "Wuye",
+              "minister": "Mrs Daaor Juliet",
+              "phone": "07035739249"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Divine Favour",
+              "address": "194, Anyim Pius Anyim Str. Wuye, FCT",
+              "minister": "Bro. Maxwell Okperi",
+              "phone": "08143209741"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Joy Unspeakable",
+              "address": "Flat 5, Block B Sandylane Apartments, Reuben Okoya Crescent, Wuye. ",
+              "minister": "Dcns Ikpoki",
+              "phone": "08037007779"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Overcoming Faith",
+              "address": "Hse Co1 Porsche Terraces Estate, Plt",
+              "minister": "Sis. Anastasia",
+              "phone": "08035956328"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Bread of Life",
+          "zoneMinister": "Bro. Oreoluwa Olayemi (08101660322)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "House of Favour",
+              "address": "Plot 819, Flat 6 Edmund Medani",
+              "minister": "Lily Odinuwe",
+              "phone": "08033599204"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Good News",
+              "address": "Plot 1800, Anthony Nkem Str., Mabushi",
+              "minister": "Mrs Moradeyo",
+              "phone": "08037191299"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Rest Round About",
+              "address": "TBD",
+              "minister": "Dcn Chibueze Ezekiel",
+              "phone": "08023118296"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Glory to Glory",
+              "address": "CIS, Dakibiyu",
+              "minister": "Mrs Ofem Jacinta",
+              "phone": "09068704501"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 27,
+      "name": "JERUSALEM",
+      "coverageAreas": "Jabi, Dakibiyu, Citec Mbora, Efab Global, Idu, Ngwa-Rogo & Airport Rd",
+      "homeCellPastors": [
+        "Pastor Eko George Ohepo (08035998064)"
+      ],
+      "homeCellMinister": "Fedrick Emmanuel (08028879056)",
+      "outreachPastor": "Pastor Eko George Ohepo (08035998064)",
+      "outreachMinister": "Bro. Fedrick Emmanuel (08028879056)",
+      "outreachLocation": "Opposite Chief Palace, Kuchingoro",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Cannan Land",
+          "zoneMinister": "Bro Bruno (080101962881)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Glory to Glory",
+              "address": "Amaka's Residence, Dakibiyu",
+              "minister": "Sis. Alice",
+              "phone": "07019492668"
+            },
+            {
+              "sortOrder": 2,
+              "name": "The Righteous",
+              "address": "10, Mike Akhigbe, By NIHOTOUR, After Apostolic Faith, Jabi",
+              "minister": "Sis Edith",
+              "phone": "08106271809"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Destine to Win",
+              "address": "Ebitu Ukiwe Street, Jabi",
+              "minister": "Dcns. Divine",
+              "phone": "09048341441"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Mount Olive",
+              "address": "890, Olu Awotesu Str., Jabi",
+              "minister": "Dcns Judith Ehaiaguna",
+              "phone": "08022169488"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Solid Rock",
+          "zoneMinister": "Bro Bruno (080101962881)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Overcoming Faith",
+              "address": "Hse. 1, close 1 Global Estate Mbora District. ",
+              "minister": "Sis. Ann Bibinu",
+              "phone": "08035956528"
+            },
+            {
+              "sortOrder": 2,
+              "name": "King's Court",
+              "address": "Hse, Phase 2, Kings Court Est. ",
+              "minister": "Sis. Kucheli Ishaya",
+              "phone": "08023417250"
+            },
+            {
+              "sortOrder": 3,
+              "name": "The Glorious",
+              "address": "Hse 6, B12 Str., Citec Mbora",
+              "minister": "TBD",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Peniel",
+              "address": "Hse 56, Berger Yard Idu, ",
+              "minister": "Dcns Christine George",
+              "phone": "07036165834"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Rivers of Living Water",
+              "address": "Platinum Estate, CSCC Junction, Idu",
+              "minister": "Mrs Bruno",
+              "phone": "08101962881"
+            },
+            {
+              "sortOrder": 6,
+              "name": "New Things",
+              "address": "Opp Chief Palace, Kuchingoro",
+              "minister": "Bro Cosmos",
+              "phone": "07037177182"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Royal Diadem",
+              "address": "Anwan Rogo",
+              "minister": "Mr Richard Oketa",
+              "phone": "08034607001"
+            }
+          ]
+        },
+        {
+          "sortOrder": 3,
+          "name": "The Joyful",
+          "zoneMinister": "Bro Onyeka (08033857011)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Everlasting Love",
+              "address": "Angwan-Rogo",
+              "minister": "Sis Helen",
+              "phone": "08035964799"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Supernatural Turnaround",
+              "address": "No 12, Mazi Igwe Obila Ave, Sahara 4, Lingo Estate, Lokogoma",
+              "minister": "Sis. Anita Momoh",
+              "phone": "07038599629"
+            },
+            {
+              "sortOrder": 3,
+              "name": "God's Favour",
+              "address": "Plot 128, Oladipo Diya Str, Near American International School, Durumi  II, Area 1",
+              "minister": "Dcns Bukola Edward",
+              "phone": "08036136207"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Double Portion",
+              "address": "TBD",
+              "minister": "Sis Dumebi",
+              "phone": "08037881167"
+            },
+            {
+              "sortOrder": 5,
+              "name": "The Nazareth",
+              "address": "QQ 18B, Sunnyvale Estate, Lokogoma",
+              "minister": "Sis. Egbodo",
+              "phone": "08036653668"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Lilly of the Valley",
+              "address": "After Police Station, Karamajiji",
+              "minister": "Bro Onyeka",
+              "phone": "08033857011"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 28,
+      "name": "PECULIAR TREASURE",
+      "coverageAreas": "Gwagwa, Zauda, Tasha, Idu, Karimo & Jiwa",
+      "homeCellPastors": [
+        "Pastoer Anthonio John - Bede(08033025886)",
+        "Pastor Isang Ubong Akpaumontia (08033709434)"
+      ],
+      "homeCellMinister": "Dcn Azubuike Osakwe (08162151645)",
+      "outreachPastor": "Pastor Anthonio John Bede (08033025886)",
+      "outreachMinister": "Pastor Isang Ubong Akpaumntia (08033709434)",
+      "outreachLocation": "By Jiwa Town Hall",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Bethel",
+          "zoneMinister": "Bro. Emeka Kingsley (08039167210)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Love",
+              "address": "Lagos Street, Gwagwa. ",
+              "minister": "Mr. Joseph Anyawu",
+              "phone": "08138535354"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Praise & Wonders",
+              "address": "By Dunamis Church, Jiwa",
+              "minister": "Rehenat Yusuf",
+              "phone": "08160040673"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Hope",
+              "address": "Back of Chief palace, Tasha 1, Bus stop",
+              "minister": "Bro. Chika Dennis",
+              "phone": "08130647125"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Honour Family",
+              "address": "Behind Yoruba Mosque,Tasha 2",
+              "minister": "Opeyemi Olumide",
+              "phone": "08163011637"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Ark of God",
+              "address": "Behind Primary School, Tasha 1",
+              "minister": "Sis Sarah Joel",
+              "phone": "09096785411"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Strong Tower",
+              "address": "By Kings land bus stop, Jiwa",
+              "minister": "Sis. Josephine Oliver",
+              "phone": "08060747806"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Divine Rescue",
+              "address": "After Crown Hospital, by Mosque, Gwagwa",
+              "minister": "Igwe Glory",
+              "phone": "07038842414"
+            },
+            {
+              "sortOrder": 8,
+              "name": "My Comforter",
+              "address": "Tasha 1, after pantaker",
+              "minister": "Sis. Chinyere Ubani",
+              "phone": "07036521900"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Mighty God",
+              "address": "Karmo, After ECWA Church",
+              "minister": "Sis Onyinyechi Ibe",
+              "phone": "08148266288"
+            },
+            {
+              "sortOrder": 10,
+              "name": "Due Season",
+              "address": "Idu by Hakim Shaba Market",
+              "minister": "TBD",
+              "phone": "09133716771"
+            },
+            {
+              "sortOrder": 11,
+              "name": "Light of the World",
+              "address": "Kempal Gwagwa by Mashalashi",
+              "minister": "Bro. Collins Adeyemi",
+              "phone": "08076142147"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Evergreen",
+          "zoneMinister": "Bro. Odion (07017098172)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Breakthrough",
+              "address": "By Plaza near the Top, Idu",
+              "minister": "Sis. Josephine",
+              "phone": "08122332216"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Healing Balm",
+              "address": "Near Catholic Church, Karmo",
+              "minister": "Sis. Sunday Blessing",
+              "phone": "07019743495"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Restoration",
+              "address": "Behind former health center, Jiwa",
+              "minister": "Sis. Sussie Festus",
+              "phone": "08068255656"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Greater Grace",
+              "address": "Near Believer Gospel Church, Jiwa",
+              "minister": "Bro. Odion",
+              "phone": "07017098172"
+            },
+            {
+              "sortOrder": 5,
+              "name": "God's Favour",
+              "address": "Behindthe burial ground, Jiwa",
+              "minister": "Sis. Ruth David",
+              "phone": "08148083242"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Wonder",
+              "address": "Jiwa Secondary School",
+              "minister": "Sis. Tina",
+              "phone": "08066133345"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Turnaround Center",
+              "address": "Idu Karmo behind health center by Idu gbagi field",
+              "minister": "Sis. Gloria Eze",
+              "phone": "09051244313"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Highly Favour",
+              "address": "Jiwa behind Twender School, Aberi",
+              "minister": "Bro. Festus",
+              "phone": "08116171049"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 29,
+      "name": "EVERLASTING ARM",
+      "coverageAreas": "Dei-dei, Dakwa, Saburi, Kaba, Madalla, Suleja, ",
+      "homeCellPastors": [
+        "Pst Olu Olanrewaju (08065279995)"
+      ],
+      "homeCellMinister": "Dcn Mayowa Fabiyi (07037078724)",
+      "outreachPastor": "Pst Olu Olanrewaju (08065279995)",
+      "outreachMinister": "Dcn Mayowa Fabiyi (07037078724)",
+      "outreachLocation": "Saburi 1, Close to Football Pitch",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Alpha",
+          "zoneMinister": "Dcn Sanmi Tunmise (09065719381)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "New Covenant",
+              "address": "No. 2, 2nd Avenue., D Close, Efab City Estate, Dakwa, Abuja",
+              "minister": "Dcn Sanmi Tunmise",
+              "phone": "08065719281"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Judah",
+              "address": "House 10, Road 16 Efab City Estate, Dakwa",
+              "minister": "Dcns Bolanle Fafowora",
+              "phone": "08065749538"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Comforter",
+              "address": "2, Oluwatoyin Street, Police Estate, Dakwa",
+              "minister": "Bro. Alex Maduka",
+              "phone": "08037569116"
+            },
+            {
+              "sortOrder": 4,
+              "name": "The Glory of God",
+              "address": "House 11, Road 18, Efab City Estate, Dakwa Dei Dei",
+              "minister": "Pst. Oluwasanmi Timothy Olanrewaju",
+              "phone": "08065279995"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Signs & Wonders",
+              "address": "9, Bala Hassan close, Sunday Adewusi Estate, Dakwa",
+              "minister": "Dcns Nkechika Agholor omojero",
+              "phone": "07055501221"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Omega",
+          "zoneMinister": "Bro. Alex Maduka (08037569116)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Sanctification",
+              "address": "Behind Hakimi Palace by Mango tree, Kagini",
+              "minister": "Bro Livinus Arinze",
+              "phone": "08132467439"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Salvation",
+              "address": "Behind Shekinah Glory Church, Kagini",
+              "minister": "Bro. Arinze Azuka",
+              "phone": "08038748855"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Fruitful Vine",
+              "address": "Madaki Street, Kaba off Kagini, Abuja",
+              "minister": "Bro Joshua Omobude",
+              "phone": "08121714013"
+            },
+            {
+              "sortOrder": 4,
+              "name": "God's Covenant",
+              "address": "Saburi 1 close to football pitch, Dei-Dei",
+              "minister": "Bro Lawrence Sunday",
+              "phone": "08099723748"
+            }
+          ]
+        },
+        {
+          "sortOrder": 3,
+          "name": "El-Roi",
+          "zoneMinister": "Bro. Joseph Aduku (08102986227)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Bethel",
+              "address": "TBD",
+              "minister": "Bro. Joseph Aduku",
+              "phone": "08102986227"
+            },
+            {
+              "sortOrder": 2,
+              "name": "God's Glory",
+              "address": "Team F, Flat 59, (C51) MD Abubakar Barracks, Dei dei Phase 3. ",
+              "minister": "Dcn Fabiyi Mayowa",
+              "phone": "07037078724"
+            },
+            {
+              "sortOrder": 3,
+              "name": "New Jerusalem",
+              "address": "Behind Yaro Collage opposite field base 2nd gate, Suleja",
+              "minister": "Bro Emmanuel Benson",
+              "phone": "08076251766"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Dominion",
+              "address": "164, Damsa Street, Kwamba Lowcost, Suleja",
+              "minister": "Dcns Adesuwa Ehigie",
+              "phone": "08065344340"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Mount Zion",
+              "address": "TBD",
+              "minister": "Sis. Juliana",
+              "phone": "08038770191"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sortOrder": 30,
+      "name": "MORE THAN A CONQUEROR",
+      "coverageAreas": "Barracks, AYA, OVA Asokoro",
+      "homeCellPastors": [
+        "Pastor Obeya Andrew (08033116501)"
+      ],
+      "homeCellMinister": "Bro Yusuf Hassan (08038252191)",
+      "outreachPastor": "Pastor Obeya Andrew (08033116501)",
+      "outreachMinister": "Dcn Yusuf Hassan (08038252191)",
+      "outreachLocation": "Lungi Barracks",
+      "zones": [
+        {
+          "sortOrder": 1,
+          "name": "Glory",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "House of Revelation",
+              "address": "Blk 2 Flt 32 Lungi Barrack, Along AYA",
+              "minister": "Sis. Nkoro Louis",
+              "phone": "08148145522"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Flourish",
+              "address": "MOQ 1/13 Officer Qts Lungi Barracks",
+              "minister": "Sis Faith Alade",
+              "phone": "08026337899"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Turnaround Encounters",
+              "address": "Flat 3, CBA Officers Qtrs",
+              "minister": "Mrs Faith Ediben Tikon",
+              "phone": "08060388520"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Flourishing Court",
+              "address": "Lungi Barracks Blk 1 Flat 18",
+              "minister": "Blessing Oyibo",
+              "phone": "08148585599"
+            }
+          ]
+        },
+        {
+          "sortOrder": 2,
+          "name": "Honor",
+          "zoneMinister": "TBD",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Excellence",
+              "address": "WU Bassey MOQ 12",
+              "minister": "Dcns Joseph Chibuzor Juliet",
+              "phone": "08034967476"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Dominion",
+              "address": "DIA Quarters, Behind, Mambilla Barr",
+              "minister": "TBD",
+              "phone": "—"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Breakthrough",
+              "address": "Blk B Flt 1 Dike Qts, New Mambilla Barr",
+              "minister": "Bro Adams Alex",
+              "phone": "08069687151"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Exceptional Land",
+              "address": "Blk 12, Flt 6, Mambillas Barrs",
+              "minister": "Bro Chidi",
+              "phone": "08038761309"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Crown of Glory",
+              "address": "Blk 1, Flt 8, Mambilla Barracks",
+              "minister": "Bro Igbekele Peter",
+              "phone": "07030261373"
+            }
+          ]
+        },
+        {
+          "sortOrder": 3,
+          "name": "City of David",
+          "zoneMinister": "Dcn. Adebisi Ogunleye (07056413056)",
+          "cells": [
+            {
+              "sortOrder": 1,
+              "name": "Host of Cherubim",
+              "address": "CBQ 1 Flat 3 Lungi Barracks",
+              "minister": "Sis. Nnena Edward",
+              "phone": "07014108255"
+            },
+            {
+              "sortOrder": 2,
+              "name": "Glorious Stars",
+              "address": "CBQ 3 Flat 1 Lungi Barracks",
+              "minister": "Bro. Jonathan Daniel",
+              "phone": "07061348898"
+            },
+            {
+              "sortOrder": 3,
+              "name": "Ark of Covenant",
+              "address": "Shop Suite 39 Mammy 1 Lungi Barracks",
+              "minister": "Bro Gbenga Oremakinde",
+              "phone": "08095343828"
+            },
+            {
+              "sortOrder": 4,
+              "name": "Fearfully Made",
+              "address": "Flat 17C CBA Barracks Mambilla Ext. ",
+              "minister": "Sis. Perede",
+              "phone": "08100708283"
+            },
+            {
+              "sortOrder": 5,
+              "name": "Flaming Fire",
+              "address": "Flat 15 CBA Barracks Officers Qrtrs., Mambilla Ext. ",
+              "minister": "Sis. Olayemi Akinkunle",
+              "phone": "08067395035"
+            },
+            {
+              "sortOrder": 6,
+              "name": "Dominion City",
+              "address": "Blk G, Flat 18, Buhari Qrtrs, Mambilla Ext. ",
+              "minister": "Sis. Christina Sunday",
+              "phone": "08036579377"
+            },
+            {
+              "sortOrder": 7,
+              "name": "Ark of Testimony",
+              "address": "Blk E, Flat 5, Buhari Qrtrs, Mambilla Ext. ",
+              "minister": "Bro. Timothy Ali",
+              "phone": "08164770735"
+            },
+            {
+              "sortOrder": 8,
+              "name": "Jesus Love",
+              "address": "Blk D, Flat 2, Dike Qrtrs, Mambilla Ext. ",
+              "minister": "Sis. Emmanuella Thomas",
+              "phone": "08054549233"
+            },
+            {
+              "sortOrder": 9,
+              "name": "Marvelous Help",
+              "address": "OVA Quarters, Asokoro",
+              "minister": "Sis. Mary Adedoyin",
+              "phone": "08061661328"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

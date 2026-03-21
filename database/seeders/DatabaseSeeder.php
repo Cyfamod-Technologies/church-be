@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             NigeriaLocationsSeeder::class,
+            LfcJahiDirectorySeeder::class,
         ]);
     }
 }
