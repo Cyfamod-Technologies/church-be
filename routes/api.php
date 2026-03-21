@@ -45,7 +45,9 @@ Route::put('homecells/{homecell}', [HomecellController::class, 'update']);
 
 Route::get('homecell-attendance', [HomecellAttendanceController::class, 'index']);
 Route::get('homecell-attendance/summary', [HomecellAttendanceController::class, 'summary']);
+Route::get('homecell-attendance/{homecellAttendanceRecord}', [HomecellAttendanceController::class, 'show']);
 Route::post('homecell-attendance', [HomecellAttendanceController::class, 'store']);
+Route::put('homecell-attendance/{homecellAttendanceRecord}', [HomecellAttendanceController::class, 'update']);
 
 Route::prefix('locations')->group(function (): void {
     Route::get('states', [LocationController::class, 'states']);

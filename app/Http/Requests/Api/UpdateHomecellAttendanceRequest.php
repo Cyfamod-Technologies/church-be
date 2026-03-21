@@ -5,13 +5,12 @@ namespace App\Http\Requests\Api;
 use App\Models\Branch;
 use App\Models\Church;
 use App\Models\Homecell;
-use App\Models\HomecellAttendanceRecord;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
-class StoreHomecellAttendanceRequest extends FormRequest
+class UpdateHomecellAttendanceRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -38,17 +37,25 @@ class StoreHomecellAttendanceRequest extends FormRequest
 
     public function withValidator(Validator $validator): void
     {
-        $validator->after(function (Validator $validator): void {
+        $record = $this->route('homecellAttendanceRecord');
+
+        $validator->after(function (Validator $validator) use ($record): void {
             $churchId = $this->integer('church_id');
             $homecellId = $this->integer('homecell_id');
             $branchId = $this->integer('branch_id');
             $recordedByUserId = $this->integer('recorded_by_user_id');
+            $meetingDate = $this->input('meeting_date');
 
             if (! $churchId || ! $homecellId) {
                 return;
             }
 
-            $homecell = Homecell::query()->with('branch:id')->find($homecellId);
+            if ($record->church_id !== $churchId) {
+                $validator->errors()->add('church_id', 'Update the attendance record within the same church.');
+                return;
+            }
+
+            $homecell = Homecell::query()->find($homecellId);
 
             if (! $homecell || $homecell->church_id !== $churchId) {
                 $validator->errors()->add('homecell_id', 'Select a homecell that belongs to this church.');
@@ -70,13 +77,6 @@ class StoreHomecellAttendanceRequest extends FormRequest
                 }
             }
 
-            if ($this->filled('meeting_date') && HomecellAttendanceRecord::query()
-                ->where('church_id', $churchId)
-                ->where('homecell_id', $homecellId)
-                ->whereDate('meeting_date', $this->input('meeting_date'))
-                ->exists()) {
-                $validator->errors()->add('meeting_date', 'This homecell already has an attendance record for the selected date.');
-            }
         });
     }
 }

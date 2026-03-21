@@ -59,7 +59,8 @@ class HomecellAttendanceApiTest extends TestCase
         $response->assertCreated()
             ->assertJsonPath('data.total_count', 31)
             ->assertJsonPath('data.homecell.id', $homecell->id)
-            ->assertJsonPath('data.branch.id', $branchId);
+            ->assertJsonPath('data.branch.id', $branchId)
+            ->assertJsonPath('data.recorded_by.name', $user->name);
 
         $this->assertDatabaseHas('homecell_attendance_records', [
             'church_id' => $church->id,
@@ -131,5 +132,127 @@ class HomecellAttendanceApiTest extends TestCase
         $listResponse->assertOk()
             ->assertJsonCount(2, 'data')
             ->assertJsonPath('data.0.branch.id', $branchId);
+    }
+
+    public function test_homecell_attendance_cannot_be_recorded_twice_for_the_same_homecell_on_the_same_day(): void
+    {
+        $church = Church::factory()->create();
+        $user = User::factory()->create([
+            'church_id' => $church->id,
+            'role' => 'church_admin',
+        ]);
+
+        $homecell = Homecell::create([
+            'church_id' => $church->id,
+            'name' => 'Faith Cell',
+            'status' => 'active',
+        ]);
+
+        $payload = [
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-21',
+            'male_count' => 10,
+            'female_count' => 12,
+            'children_count' => 3,
+        ];
+
+        $this->postJson('/api/homecell-attendance', $payload)->assertCreated();
+
+        $response = $this->postJson('/api/homecell-attendance', $payload);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['meeting_date']);
+    }
+
+    public function test_homecell_attendance_record_can_be_retrieved(): void
+    {
+        $church = Church::factory()->create();
+        $user = User::factory()->create([
+            'church_id' => $church->id,
+            'role' => 'church_admin',
+        ]);
+
+        $homecell = Homecell::create([
+            'church_id' => $church->id,
+            'name' => 'Dominion Cell',
+            'status' => 'active',
+        ]);
+
+        $record = HomecellAttendanceRecord::create([
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-21',
+            'male_count' => 9,
+            'female_count' => 11,
+            'children_count' => 4,
+            'total_count' => 24,
+            'notes' => 'Retrieved record.',
+        ]);
+
+        $this->getJson('/api/homecell-attendance/'.$record->id)
+            ->assertOk()
+            ->assertJsonPath('data.id', $record->id)
+            ->assertJsonPath('data.homecell.id', $homecell->id)
+            ->assertJsonPath('data.recorded_by.name', $user->name)
+            ->assertJsonPath('data.notes', 'Retrieved record.');
+    }
+
+    public function test_homecell_attendance_can_be_updated(): void
+    {
+        $church = Church::factory()->create();
+        $user = User::factory()->create([
+            'church_id' => $church->id,
+            'role' => 'church_admin',
+        ]);
+
+        $homecell = Homecell::create([
+            'church_id' => $church->id,
+            'name' => 'Grace Cell',
+            'status' => 'active',
+        ]);
+
+        $record = HomecellAttendanceRecord::create([
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-21',
+            'male_count' => 10,
+            'female_count' => 8,
+            'children_count' => 2,
+            'total_count' => 20,
+            'first_timers_count' => 1,
+            'new_converts_count' => 0,
+            'notes' => 'Original record.',
+        ]);
+
+        $response = $this->putJson('/api/homecell-attendance/'.$record->id, [
+            'church_id' => $church->id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $user->id,
+            'meeting_date' => '2026-03-21',
+            'male_count' => 12,
+            'female_count' => 14,
+            'children_count' => 4,
+            'first_timers_count' => 2,
+            'new_converts_count' => 1,
+            'notes' => 'Updated record.',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('data.total_count', 30)
+            ->assertJsonPath('data.notes', 'Updated record.')
+            ->assertJsonPath('data.recorded_by.name', $user->name);
+
+        $this->assertDatabaseHas('homecell_attendance_records', [
+            'id' => $record->id,
+            'male_count' => 12,
+            'female_count' => 14,
+            'children_count' => 4,
+            'total_count' => 30,
+            'notes' => 'Updated record.',
+        ]);
     }
 }

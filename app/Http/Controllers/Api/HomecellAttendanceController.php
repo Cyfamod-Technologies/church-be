@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreHomecellAttendanceRequest;
+use App\Http\Requests\Api\UpdateHomecellAttendanceRequest;
 use App\Models\Homecell;
 use App\Models\HomecellAttendanceRecord;
 use Illuminate\Database\Eloquent\Builder;
@@ -48,32 +49,35 @@ class HomecellAttendanceController extends Controller
     {
         $validated = $request->validated();
         $homecell = Homecell::query()->findOrFail($validated['homecell_id']);
-        $total = (int) $validated['male_count'] + (int) $validated['female_count'] + (int) $validated['children_count'];
-
-        $record = HomecellAttendanceRecord::create([
-            'church_id' => $validated['church_id'],
-            'branch_id' => $validated['branch_id'] ?? $homecell->branch_id,
-            'homecell_id' => $homecell->id,
-            'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
-            'meeting_date' => $validated['meeting_date'],
-            'male_count' => $validated['male_count'],
-            'female_count' => $validated['female_count'],
-            'children_count' => $validated['children_count'],
-            'total_count' => $total,
-            'first_timers_count' => $validated['first_timers_count'] ?? 0,
-            'new_converts_count' => $validated['new_converts_count'] ?? 0,
-            'offering_amount' => $validated['offering_amount'] ?? null,
-            'notes' => $validated['notes'] ?? null,
-        ])->load([
-            'branch:id,name,code',
-            'homecell:id,name,code,branch_id',
-            'recordedBy:id,name,email',
-        ]);
+        $record = $this->persistRecord(new HomecellAttendanceRecord(), $validated, $homecell);
 
         return response()->json([
             'message' => 'Homecell attendance saved successfully.',
             'data' => $this->transformRecord($record),
         ], 201);
+    }
+
+    public function show(HomecellAttendanceRecord $homecellAttendanceRecord): JsonResponse
+    {
+        return response()->json([
+            'data' => $this->transformRecord($homecellAttendanceRecord->load([
+                'branch:id,name,code',
+                'homecell:id,name,code,branch_id',
+                'recordedBy:id,name,email',
+            ])),
+        ]);
+    }
+
+    public function update(UpdateHomecellAttendanceRequest $request, HomecellAttendanceRecord $homecellAttendanceRecord): JsonResponse
+    {
+        $validated = $request->validated();
+        $homecell = Homecell::query()->findOrFail($validated['homecell_id']);
+        $record = $this->persistRecord($homecellAttendanceRecord, $validated, $homecell);
+
+        return response()->json([
+            'message' => 'Homecell attendance updated successfully.',
+            'data' => $this->transformRecord($record),
+        ]);
     }
 
     public function summary(Request $request): JsonResponse
@@ -165,5 +169,34 @@ class HomecellAttendanceController extends Controller
             ] : null,
             'created_at' => $record->created_at,
         ];
+    }
+
+    private function persistRecord(HomecellAttendanceRecord $record, array $validated, Homecell $homecell): HomecellAttendanceRecord
+    {
+        $total = (int) $validated['male_count'] + (int) $validated['female_count'] + (int) $validated['children_count'];
+
+        $record->fill([
+            'church_id' => $validated['church_id'],
+            'branch_id' => $validated['branch_id'] ?? $homecell->branch_id,
+            'homecell_id' => $homecell->id,
+            'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
+            'meeting_date' => $validated['meeting_date'],
+            'male_count' => $validated['male_count'],
+            'female_count' => $validated['female_count'],
+            'children_count' => $validated['children_count'],
+            'total_count' => $total,
+            'first_timers_count' => $validated['first_timers_count'] ?? 0,
+            'new_converts_count' => $validated['new_converts_count'] ?? 0,
+            'offering_amount' => $validated['offering_amount'] ?? null,
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        $record->save();
+
+        return $record->load([
+            'branch:id,name,code',
+            'homecell:id,name,code,branch_id',
+            'recordedBy:id,name,email',
+        ]);
     }
 }
