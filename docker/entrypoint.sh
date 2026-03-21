@@ -23,15 +23,18 @@ chown -R www-data:www-data storage bootstrap/cache
 #   composer install --no-interaction --prefer-dist --optimize-autoloader
 # fi
 
-# Composer install
-composer install --no-interaction --prefer-dist --optimize-autoloader
+# Composer install only if vendor is missing
+if [ ! -d vendor ]; then
+  echo "📦 Vendor directory missing, running composer install..."
+  composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+fi
 
 # Laravel setup
 echo "🔑 Generating app key..."
 php artisan key:generate || echo "App key already set"
 
-echo "🔗 Linking storage..."
-php artisan storage:link || echo "Storage already linked"
+# echo "🔗 Linking storage..."
+# php artisan storage:link || echo "Storage already linked"
 
 
 echo "🛠 Running migrations..."
@@ -40,10 +43,10 @@ php artisan migrate --force || echo "Migration failed (likely already run)"
 echo "🌱 Running seeders..."
 php artisan db:seed --force || echo "Seeding skipped or failed"
 
-echo "📚 Generating Swagger docs..."
-php artisan l5-swagger:generate || echo "Swagger skipped"
+# echo "📚 Generating Swagger docs..."
+# php artisan l5-swagger:generate || echo "Swagger skipped"
 
-echo "📚 Generating Storage..."
+# echo "📚 Generating Storage..."
 # rm -f public/storage
 # php artisan storage:link
 
