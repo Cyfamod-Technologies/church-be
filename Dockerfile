@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 # Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
@@ -44,6 +44,9 @@ COPY . .
 # Ensure entrypoint script is copied before installing Composer deps
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Remove cached manifests copied from local/dev environment
+RUN rm -f bootstrap/cache/*.php
 
 # Install PHP dependencies
 RUN composer install --no-dev --no-scripts --optimize-autoloader --no-interaction
