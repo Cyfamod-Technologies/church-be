@@ -95,6 +95,41 @@ class ChurchApiTest extends TestCase
         $byPhone->assertOk()->assertJsonPath('data.user.phone', '+2348038769000');
     }
 
+    public function test_homecell_leader_login_returns_homecell_context(): void
+    {
+        $church = Church::factory()->create(['name' => 'Living Faith Yaba']);
+        $homecellResponse = $this->postJson('/api/homecells', [
+            'church_id' => $church->id,
+            'name' => 'Dominion Cell',
+            'meeting_day' => 'Saturday',
+            'meeting_time' => '17:30',
+            'leaders' => [
+                [
+                    'name' => 'Leader Faith',
+                    'role' => 'Leader',
+                    'email' => 'faith.leader@test.com',
+                    'phone' => '+2348003334444',
+                    'password' => 'leaderpass123',
+                    'is_primary' => true,
+                ],
+            ],
+        ]);
+
+        $leaderUser = User::query()->where('email', 'faith.leader@test.com')->firstOrFail();
+
+        $loginResponse = $this->postJson('/api/auth/login', [
+            'login' => 'faith.leader@test.com',
+            'password' => 'leaderpass123',
+        ]);
+
+        $loginResponse->assertOk()
+            ->assertJsonPath('data.user.id', $leaderUser->id)
+            ->assertJsonPath('data.user.role', 'homecell_leader')
+            ->assertJsonPath('data.homecell.name', 'Dominion Cell')
+            ->assertJsonPath('data.homecell_leader.email', 'faith.leader@test.com')
+            ->assertJsonPath('data.church.name', 'Living Faith Yaba');
+    }
+
     public function test_church_setup_can_be_loaded_and_updated(): void
     {
         $church = Church::factory()->create([

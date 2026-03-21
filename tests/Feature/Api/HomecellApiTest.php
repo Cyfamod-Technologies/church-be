@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api;
 
 use App\Models\Church;
+use App\Models\HomecellLeader;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -141,5 +142,66 @@ class HomecellApiTest extends TestCase
             ->assertJsonPath('meta.stats.total_homecells', 1)
             ->assertJsonPath('meta.stats.assigned_to_branches', 1)
             ->assertJsonPath('meta.stats.leaders_assigned', 1);
+    }
+
+    public function test_homecell_leader_can_be_created_with_login_account_and_profile_can_be_updated(): void
+    {
+        $church = Church::factory()->create();
+
+        $homecellId = $this->postJson('/api/homecells', [
+            'church_id' => $church->id,
+            'name' => 'Covenant Cell',
+            'meeting_day' => 'Saturday',
+            'meeting_time' => '17:00',
+            'leaders' => [
+                [
+                    'name' => 'Sis. Ruth Daniel',
+                    'role' => 'Leader',
+                    'phone' => '+2348010001111',
+                    'email' => 'ruth.daniel@test.com',
+                    'password' => 'leaderpass123',
+                    'is_primary' => true,
+                ],
+            ],
+        ])->json('data.id');
+
+        $leader = HomecellLeader::query()->where('homecell_id', $homecellId)->firstOrFail();
+
+        $this->assertNotNull($leader->user_id);
+        $this->assertDatabaseHas('users', [
+            'id' => $leader->user_id,
+            'role' => 'homecell_leader',
+            'email' => 'ruth.daniel@test.com',
+        ]);
+
+        $showResponse = $this->getJson('/api/homecell-leaders/'.$leader->id);
+        $updateResponse = $this->putJson('/api/homecell-leaders/'.$leader->id, [
+            'name' => 'Ruth Daniel Updated',
+            'phone' => '+2348010002222',
+            'email' => 'ruth.updated@test.com',
+            'password' => 'newleaderpass123',
+        ]);
+
+        $showResponse->assertOk()
+            ->assertJsonPath('data.can_login', true)
+            ->assertJsonPath('data.login_account.role', 'homecell_leader');
+
+        $updateResponse->assertOk()
+            ->assertJsonPath('data.name', 'Ruth Daniel Updated')
+            ->assertJsonPath('data.email', 'ruth.updated@test.com')
+            ->assertJsonPath('data.login_account.email', 'ruth.updated@test.com');
+
+        $this->assertDatabaseHas('homecell_leaders', [
+            'id' => $leader->id,
+            'name' => 'Ruth Daniel Updated',
+            'email' => 'ruth.updated@test.com',
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $leader->user_id,
+            'name' => 'Ruth Daniel Updated',
+            'email' => 'ruth.updated@test.com',
+            'role' => 'homecell_leader',
+        ]);
     }
 }

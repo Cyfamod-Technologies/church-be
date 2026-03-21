@@ -31,11 +31,14 @@ class StoreHomecellRequest extends FormRequest
             'notes' => ['nullable', 'string', 'max:1000'],
             'status' => ['nullable', 'string', 'max:50'],
             'leaders' => ['nullable', 'array'],
+            'leaders.*.id' => ['nullable', 'integer'],
+            'leaders.*.user_id' => ['nullable', 'integer'],
             'leaders.*.name' => ['required', 'string', 'max:255'],
             'leaders.*.role' => ['nullable', 'string', 'max:100'],
             'leaders.*.phone' => ['nullable', 'string', 'max:30'],
             'leaders.*.email' => ['nullable', 'email', 'max:255'],
             'leaders.*.is_primary' => ['nullable', 'boolean'],
+            'leaders.*.password' => ['nullable', 'string', 'min:6', 'max:255'],
         ];
     }
 

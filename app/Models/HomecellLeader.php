@@ -12,6 +12,7 @@ class HomecellLeader extends Model
 
     protected $fillable = [
         'homecell_id',
+        'user_id',
         'name',
         'role',
         'phone',
@@ -30,5 +31,10 @@ class HomecellLeader extends Model
     public function homecell(): BelongsTo
     {
         return $this->belongsTo(Homecell::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

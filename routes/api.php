@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ChurchUnitController;
 use App\Http\Controllers\Api\GuestResponseEntryController;
 use App\Http\Controllers\Api\HomecellAttendanceController;
 use App\Http\Controllers\Api\HomecellController;
+use App\Http\Controllers\Api\HomecellLeaderController;
 use App\Http\Controllers\Api\LocationController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,8 @@ Route::get('homecells', [HomecellController::class, 'index']);
 Route::post('homecells', [HomecellController::class, 'store']);
 Route::get('homecells/{homecell}', [HomecellController::class, 'show']);
 Route::put('homecells/{homecell}', [HomecellController::class, 'update']);
+Route::get('homecell-leaders/{homecellLeader}', [HomecellLeaderController::class, 'show']);
+Route::put('homecell-leaders/{homecellLeader}', [HomecellLeaderController::class, 'update']);
 
 Route::get('guest-response-entries', [GuestResponseEntryController::class, 'index']);
 Route::post('guest-response-entries', [GuestResponseEntryController::class, 'store']);

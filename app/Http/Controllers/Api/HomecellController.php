@@ -8,10 +8,12 @@ use App\Http\Requests\Api\UpdateHomecellRequest;
 use App\Models\Branch;
 use App\Models\Homecell;
 use App\Models\HomecellLeader;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 
 class HomecellController extends Controller
@@ -126,7 +128,8 @@ class HomecellController extends Controller
         return [
             'church:id,name,code',
             'branch:id,name,code',
-            'leaders:id,homecell_id,name,role,phone,email,is_primary,sort_order',
+            'leaders.user:id,name,email,phone,role',
+            'leaders:id,homecell_id,user_id,name,role,phone,email,is_primary,sort_order',
         ];
     }
 
@@ -156,11 +159,20 @@ class HomecellController extends Controller
             ] : null,
             'leaders' => $homecell->leaders->map(fn (HomecellLeader $leader) => [
                 'id' => $leader->id,
+                'user_id' => $leader->user_id,
                 'name' => $leader->name,
                 'role' => $leader->role,
                 'phone' => $leader->phone,
                 'email' => $leader->email,
                 'is_primary' => $leader->is_primary,
+                'can_login' => (bool) $leader->user_id,
+                'login_account' => $leader->user ? [
+                    'id' => $leader->user->id,
+                    'name' => $leader->user->name,
+                    'email' => $leader->user->email,
+                    'phone' => $leader->user->phone,
+                    'role' => $leader->user->role,
+                ] : null,
             ])->values(),
             'created_at' => $homecell->created_at,
             'updated_at' => $homecell->updated_at,
@@ -169,10 +181,20 @@ class HomecellController extends Controller
 
     private function syncLeaders(Homecell $homecell, array $leaders): void
     {
-        $homecell->leaders()->delete();
+        $existingLeaders = $homecell->leaders()->with('user')->get()->keyBy('id');
+        $keptLeaderIds = [];
 
         foreach (array_values($leaders) as $index => $leader) {
-            HomecellLeader::create([
+            $leaderId = isset($leader['id']) ? (int) $leader['id'] : null;
+            $leaderModel = $leaderId ? $existingLeaders->get($leaderId) : null;
+
+            if (! $leaderModel) {
+                $leaderModel = new HomecellLeader([
+                    'homecell_id' => $homecell->id,
+                ]);
+            }
+
+            $leaderModel->fill([
                 'homecell_id' => $homecell->id,
                 'name' => $leader['name'],
                 'role' => $leader['role'] ?? 'Leader',
@@ -181,6 +203,106 @@ class HomecellController extends Controller
                 'is_primary' => (bool) ($leader['is_primary'] ?? false),
                 'sort_order' => $index + 1,
             ]);
+            $leaderModel->save();
+
+            $this->syncLeaderLoginAccount($homecell, $leaderModel, $leader);
+            $keptLeaderIds[] = $leaderModel->id;
+        }
+
+        $leadersToDelete = $existingLeaders
+            ->filter(fn (HomecellLeader $leader) => ! in_array($leader->id, $keptLeaderIds, true));
+
+        foreach ($leadersToDelete as $leaderToDelete) {
+            $leaderToDelete->delete();
+        }
+    }
+
+    private function syncLeaderLoginAccount(Homecell $homecell, HomecellLeader $leaderModel, array $leader): void
+    {
+        $shouldCreateOrUpdateLogin = isset($leader['password']) && trim((string) $leader['password']) !== '';
+        $linkedUserId = isset($leader['user_id']) ? (int) $leader['user_id'] : null;
+
+        if (! $shouldCreateOrUpdateLogin && ! $leaderModel->user_id && ! $linkedUserId) {
+            return;
+        }
+
+        $linkedUser = $linkedUserId ? User::query()->find($linkedUserId) : null;
+
+        if ($linkedUserId && ! $linkedUser) {
+            throw ValidationException::withMessages([
+                'leaders' => ['The selected leader login account could not be found.'],
+            ]);
+        }
+
+        $user = $leaderModel->user
+            ?: $linkedUser
+            ?: new User([
+            'church_id' => $homecell->church_id,
+            'branch_id' => $homecell->branch_id,
+            'role' => 'homecell_leader',
+        ]);
+
+        if ($user->exists && $user->church_id !== $homecell->church_id) {
+            throw ValidationException::withMessages([
+                'leaders' => ['A leader login account can only be linked within the same church.'],
+            ]);
+        }
+
+        $email = $leader['email'] ?? null;
+        $phone = $leader['phone'] ?? null;
+
+        $this->guardUniqueUserIdentity($user->id, $email, $phone);
+
+        $user->fill([
+            'church_id' => $homecell->church_id,
+            'branch_id' => $homecell->branch_id,
+            'name' => $leader['name'],
+            'email' => $email,
+            'phone' => $phone,
+            'role' => 'homecell_leader',
+        ]);
+
+        if ($shouldCreateOrUpdateLogin) {
+            $user->password = $leader['password'];
+        }
+
+        $user->save();
+
+        if ($leaderModel->user_id !== $user->id) {
+            $leaderModel->user_id = $user->id;
+            $leaderModel->save();
+        }
+    }
+
+    private function guardUniqueUserIdentity(?int $ignoreUserId, ?string $email, ?string $phone): void
+    {
+        $email = $email !== null ? trim($email) : null;
+        $phone = $phone !== null ? trim($phone) : null;
+
+        if ($email !== null && $email !== '') {
+            $emailExists = User::query()
+                ->where('email', $email)
+                ->when($ignoreUserId, fn (Builder $query) => $query->where('id', '!=', $ignoreUserId))
+                ->exists();
+
+            if ($emailExists) {
+                throw ValidationException::withMessages([
+                    'leaders' => ['That email address is already in use by another user account.'],
+                ]);
+            }
+        }
+
+        if ($phone !== null && $phone !== '') {
+            $phoneExists = User::query()
+                ->where('phone', $phone)
+                ->when($ignoreUserId, fn (Builder $query) => $query->where('id', '!=', $ignoreUserId))
+                ->exists();
+
+            if ($phoneExists) {
+                throw ValidationException::withMessages([
+                    'leaders' => ['That phone number is already in use by another user account.'],
+                ]);
+            }
         }
     }
 

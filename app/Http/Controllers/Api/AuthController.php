@@ -20,6 +20,7 @@ class AuthController extends Controller
                 'branch.tag:id,name,slug',
                 'branch.currentParentChurch:id,name,code',
                 'branch.currentParentBranch:id,name',
+                'homecellLeader.homecell.branch:id,name,code',
             ])
             ->where('email', $validated['login'])
             ->orWhere('phone', $validated['login'])
@@ -28,6 +29,15 @@ class AuthController extends Controller
         if (! $user || ! Hash::check($validated['password'], $user->password)) {
             return response()->json([
                 'message' => 'Invalid credentials.',
+            ], 422);
+        }
+
+        $homecellLeader = $user->homecellLeader;
+        $homecell = $homecellLeader?->homecell;
+
+        if ($user->role === 'homecell_leader' && ! $homecellLeader) {
+            return response()->json([
+                'message' => 'This homecell leader account is not currently assigned to a homecell.',
             ], 422);
         }
 
@@ -58,6 +68,27 @@ class AuthController extends Controller
                             'name' => $user->branch->currentParentChurch->name,
                             'code' => $user->branch->currentParentChurch->code,
                         ] : null),
+                ] : null,
+                'homecell_leader' => $homecellLeader ? [
+                    'id' => $homecellLeader->id,
+                    'name' => $homecellLeader->name,
+                    'role' => $homecellLeader->role,
+                    'phone' => $homecellLeader->phone,
+                    'email' => $homecellLeader->email,
+                    'is_primary' => $homecellLeader->is_primary,
+                    'user_id' => $homecellLeader->user_id,
+                ] : null,
+                'homecell' => $homecell ? [
+                    'id' => $homecell->id,
+                    'name' => $homecell->name,
+                    'code' => $homecell->code,
+                    'meeting_day' => $homecell->meeting_day,
+                    'meeting_time' => $homecell->meeting_time,
+                    'branch' => $homecell->branch ? [
+                        'id' => $homecell->branch->id,
+                        'name' => $homecell->branch->name,
+                        'code' => $homecell->branch->code,
+                    ] : null,
                 ] : null,
             ],
         ]);
