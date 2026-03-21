@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BranchController;
 use App\Http\Controllers\Api\BranchTagController;
 use App\Http\Controllers\Api\ChurchController;
 use App\Http\Controllers\Api\ChurchRegistrationController;
+use App\Http\Controllers\Api\GuestResponseEntryController;
 use App\Http\Controllers\Api\HomecellAttendanceController;
 use App\Http\Controllers\Api\HomecellController;
 use App\Http\Controllers\Api\LocationController;
@@ -42,6 +43,10 @@ Route::get('homecells', [HomecellController::class, 'index']);
 Route::post('homecells', [HomecellController::class, 'store']);
 Route::get('homecells/{homecell}', [HomecellController::class, 'show']);
 Route::put('homecells/{homecell}', [HomecellController::class, 'update']);
+
+Route::get('guest-response-entries', [GuestResponseEntryController::class, 'index']);
+Route::post('guest-response-entries', [GuestResponseEntryController::class, 'store']);
+Route::put('guest-response-entries/{guestResponseEntry}', [GuestResponseEntryController::class, 'update']);
 
 Route::get('homecell-attendance', [HomecellAttendanceController::class, 'index']);
 Route::get('homecell-attendance/summary', [HomecellAttendanceController::class, 'summary']);
