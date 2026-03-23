@@ -31,6 +31,7 @@ Route::get('attendance/summary', [AttendanceController::class, 'summary']);
 Route::get('attendance/{attendanceRecord}', [AttendanceController::class, 'show']);
 Route::post('attendance', [AttendanceController::class, 'store']);
 Route::put('attendance/{attendanceRecord}', [AttendanceController::class, 'update']);
+Route::delete('attendance/{attendanceRecord}', [AttendanceController::class, 'destroy']);
 
 Route::get('branch-tags', [BranchTagController::class, 'index']);
 Route::post('branch-tags', [BranchTagController::class, 'store']);

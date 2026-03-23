@@ -62,6 +62,15 @@ class AttendanceController extends Controller
         ]);
     }
 
+    public function destroy(AttendanceRecord $attendanceRecord): JsonResponse
+    {
+        $attendanceRecord->delete();
+
+        return response()->json([
+            'message' => 'Attendance deleted successfully.',
+        ]);
+    }
+
     public function summary(Request $request): JsonResponse
     {
         $request->validate([
