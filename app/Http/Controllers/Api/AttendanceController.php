@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UpdateAttendanceRequest;
 use App\Http\Requests\Api\StoreAttendanceRequest;
 use App\Models\AttendanceRecord;
+use App\Support\BranchHierarchy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,10 +18,14 @@ class AttendanceController extends Controller
 
     public function index(Request $request): JsonResponse
     {
+        $branchScopeIds = $request->integer('branch_id')
+            ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
+            : [];
+
         $records = AttendanceRecord::query()
             ->with($this->relations)
             ->when($request->integer('church_id'), fn (Builder $query, int $churchId) => $query->where('church_id', $churchId))
-            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
             ->when($request->filled('service_type'), fn (Builder $query) => $query->where('service_type', $request->string('service_type')->toString()))
             ->when($request->filled('date_from'), fn (Builder $query) => $query->whereDate('service_date', '>=', $request->date('date_from')))
             ->when($request->filled('date_to'), fn (Builder $query) => $query->whereDate('service_date', '<=', $request->date('date_to')))
@@ -88,10 +93,13 @@ class AttendanceController extends Controller
         [$dateFrom, $dateTo] = $period === 'monthly'
             ? [$anchorDate->copy()->startOfMonth(), $anchorDate->copy()->endOfMonth()]
             : [$anchorDate->copy()->startOfWeek(), $anchorDate->copy()->endOfWeek()];
+        $branchScopeIds = $request->integer('branch_id')
+            ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
+            : [];
 
         $records = AttendanceRecord::query()
             ->where('church_id', $request->integer('church_id'))
-            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
             ->whereBetween('service_date', [$dateFrom->toDateString(), $dateTo->toDateString()])
             ->orderBy('service_date')
             ->get();

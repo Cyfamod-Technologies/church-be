@@ -10,6 +10,7 @@ use App\Models\Church;
 use App\Models\Homecell;
 use App\Models\HomecellLeader;
 use App\Models\User;
+use App\Support\BranchHierarchy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,11 +25,12 @@ class HomecellController extends Controller
         $churchId = $request->integer('church_id');
         $branchId = $request->integer('branch_id');
         $search = $request->string('search')->toString();
+        $branchScopeIds = $branchId ? BranchHierarchy::descendantIdsInclusive($branchId) : [];
 
         $query = Homecell::query()
             ->with($this->relations())
             ->when($churchId, fn (Builder $builder) => $builder->where('church_id', $churchId))
-            ->when($branchId, fn (Builder $builder) => $builder->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $builder) => $builder->whereIn('branch_id', $branchScopeIds))
             ->when($search !== '', function (Builder $builder) use ($search): void {
                 $builder->where(function (Builder $innerQuery) use ($search): void {
                     $innerQuery->where('name', 'like', '%'.$search.'%')

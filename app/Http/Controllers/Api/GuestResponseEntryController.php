@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreGuestResponseEntryRequest;
 use App\Http\Requests\Api\UpdateGuestResponseEntryRequest;
 use App\Models\GuestResponseEntry;
+use App\Support\BranchHierarchy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,10 +26,14 @@ class GuestResponseEntryController extends Controller
             'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
 
+        $branchScopeIds = $request->integer('branch_id')
+            ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
+            : [];
+
         $records = GuestResponseEntry::query()
             ->with(['branch:id,name,code', 'recordedBy:id,name,email', 'churchUnits:id,name,code,status'])
             ->where('church_id', $request->integer('church_id'))
-            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
             ->when($request->filled('entry_type'), fn (Builder $query) => $query->where('entry_type', $request->string('entry_type')->toString()))
             ->when($request->filled('date_from'), fn (Builder $query) => $query->whereDate('service_date', '>=', $request->date('date_from')))
             ->when($request->filled('date_to'), fn (Builder $query) => $query->whereDate('service_date', '<=', $request->date('date_to')))

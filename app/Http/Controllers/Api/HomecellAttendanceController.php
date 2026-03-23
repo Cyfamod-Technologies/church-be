@@ -7,6 +7,7 @@ use App\Http\Requests\Api\StoreHomecellAttendanceRequest;
 use App\Http\Requests\Api\UpdateHomecellAttendanceRequest;
 use App\Models\Homecell;
 use App\Models\HomecellAttendanceRecord;
+use App\Support\BranchHierarchy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,6 +25,10 @@ class HomecellAttendanceController extends Controller
             'date_to' => ['nullable', 'date'],
         ]);
 
+        $branchScopeIds = $request->integer('branch_id')
+            ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
+            : [];
+
         $records = HomecellAttendanceRecord::query()
             ->with([
                 'branch:id,name,code',
@@ -31,7 +36,7 @@ class HomecellAttendanceController extends Controller
                 'recordedBy:id,name,email',
             ])
             ->where('church_id', $request->integer('church_id'))
-            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
             ->when($request->integer('homecell_id'), fn (Builder $query, int $homecellId) => $query->where('homecell_id', $homecellId))
             ->when($request->filled('date_from'), fn (Builder $query) => $query->whereDate('meeting_date', '>=', $request->date('date_from')))
             ->when($request->filled('date_to'), fn (Builder $query) => $query->whereDate('meeting_date', '<=', $request->date('date_to')))
@@ -98,10 +103,13 @@ class HomecellAttendanceController extends Controller
         [$dateFrom, $dateTo] = $period === 'monthly'
             ? [$anchorDate->copy()->startOfMonth(), $anchorDate->copy()->endOfMonth()]
             : [$anchorDate->copy()->startOfWeek(), $anchorDate->copy()->endOfWeek()];
+        $branchScopeIds = $request->integer('branch_id')
+            ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
+            : [];
 
         $records = HomecellAttendanceRecord::query()
             ->where('church_id', $request->integer('church_id'))
-            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
             ->when($request->integer('homecell_id'), fn (Builder $query, int $homecellId) => $query->where('homecell_id', $homecellId))
             ->whereBetween('meeting_date', [$dateFrom->toDateString(), $dateTo->toDateString()])
             ->get();
@@ -109,7 +117,7 @@ class HomecellAttendanceController extends Controller
         $activeHomecells = Homecell::query()
             ->where('church_id', $request->integer('church_id'))
             ->where('status', 'active')
-            ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
+            ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
             ->when($request->integer('homecell_id'), fn (Builder $query, int $homecellId) => $query->whereKey($homecellId))
             ->count();
 
