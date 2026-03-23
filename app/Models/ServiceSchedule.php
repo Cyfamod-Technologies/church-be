@@ -13,6 +13,7 @@ class ServiceSchedule extends Model
 
     protected $fillable = [
         'church_id',
+        'branch_id',
         'service_type',
         'label',
         'day_name',
@@ -33,6 +34,11 @@ class ServiceSchedule extends Model
     public function church(): BelongsTo
     {
         return $this->belongsTo(Church::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function attendanceRecords(): HasMany

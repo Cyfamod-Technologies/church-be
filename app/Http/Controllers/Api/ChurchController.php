@@ -7,26 +7,34 @@ use App\Http\Requests\Api\UpdateHomecellScheduleRequest;
 use App\Http\Requests\Api\UpdateChurchProfileRequest;
 use App\Http\Requests\Api\UpdateServiceScheduleRequest;
 use App\Http\Requests\Api\UpdateChurchSetupRequest;
+use App\Models\Branch;
 use App\Models\Church;
 use App\Models\ServiceSchedule;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ChurchController extends Controller
 {
-    public function show(Church $church): JsonResponse
+    public function show(Request $request, Church $church): JsonResponse
     {
+        $branch = $this->resolveScopedBranch($church, $request->integer('branch_id'));
+        $church->load(['users']);
+        $church->setRelation('serviceSchedules', $this->resolveServiceSchedules($church, $branch));
+
         return response()->json([
-            'data' => $church->load(['users', 'serviceSchedules']),
+            'data' => $church,
         ]);
     }
 
-    public function serviceSchedules(Church $church): JsonResponse
+    public function serviceSchedules(Request $request, Church $church): JsonResponse
     {
+        $branch = $this->resolveScopedBranch($church, $request->integer('branch_id'));
+
         return response()->json([
-            'data' => $church->serviceSchedules()->get(),
+            'data' => $this->resolveServiceSchedules($church, $branch),
         ]);
     }
 
@@ -85,17 +93,27 @@ class ChurchController extends Controller
     public function updateServiceSchedules(UpdateServiceScheduleRequest $request, Church $church): JsonResponse
     {
         $serviceData = $request->validated()['services'];
+        $branch = $this->resolveScopedBranch($church, $request->integer('branch_id'));
 
-        $result = DB::transaction(function () use ($serviceData, $church): array {
-            $church->update([
-                'special_services_enabled' => (bool) $serviceData['special_services_enabled'],
-            ]);
+        $result = DB::transaction(function () use ($serviceData, $church, $branch): array {
+            if ($branch) {
+                $branch->update([
+                    'special_services_enabled' => (bool) $serviceData['special_services_enabled'],
+                ]);
+            } else {
+                $church->update([
+                    'special_services_enabled' => (bool) $serviceData['special_services_enabled'],
+                ]);
+            }
 
-            $church->serviceSchedules()->delete();
-            $this->syncServiceSchedules($church, $serviceData);
+            ServiceSchedule::query()
+                ->where('church_id', $church->id)
+                ->when($branch, fn ($query) => $query->where('branch_id', $branch->id), fn ($query) => $query->whereNull('branch_id'))
+                ->delete();
+            $this->syncServiceSchedules($church, $serviceData, $branch);
 
             return [
-                'church' => $church->fresh()->load(['users', 'serviceSchedules']),
+                'church' => $church->fresh()->load(['users']),
             ];
         });
 
@@ -178,7 +196,7 @@ class ChurchController extends Controller
             $admin->save();
 
             $church->serviceSchedules()->delete();
-            $this->syncServiceSchedules($church, $serviceData);
+            $this->syncServiceSchedules($church, $serviceData, null);
 
             return [
                 'church' => $church->fresh()->load(['users', 'serviceSchedules']),
@@ -203,7 +221,7 @@ class ChurchController extends Controller
             ->first() ?? $church->users()->firstOrFail();
     }
 
-    private function syncServiceSchedules(Church $church, array $serviceData): void
+    private function syncServiceSchedules(Church $church, array $serviceData, ?Branch $branch): void
     {
         foreach (array_values($serviceData['sunday_times']) as $index => $time) {
             if ($index >= (int) $serviceData['sunday_count']) {
@@ -212,6 +230,7 @@ class ChurchController extends Controller
 
             ServiceSchedule::create([
                 'church_id' => $church->id,
+                'branch_id' => $branch?->id,
                 'service_type' => 'sunday',
                 'label' => ($index + 1).$this->ordinalSuffix($index + 1).' Service',
                 'day_name' => 'Sunday',
@@ -223,6 +242,7 @@ class ChurchController extends Controller
         if ($serviceData['wednesday_enabled']) {
             ServiceSchedule::create([
                 'church_id' => $church->id,
+                'branch_id' => $branch?->id,
                 'service_type' => 'wednesday',
                 'label' => 'Wednesday Service',
                 'day_name' => 'Wednesday',
@@ -241,6 +261,7 @@ class ChurchController extends Controller
             foreach ($days as $day => $meta) {
                 ServiceSchedule::create([
                     'church_id' => $church->id,
+                    'branch_id' => $branch?->id,
                     'service_type' => 'wose',
                     'label' => $meta['label'],
                     'day_name' => Str::title($day),
@@ -253,6 +274,7 @@ class ChurchController extends Controller
         foreach (array_values($serviceData['custom_services'] ?? []) as $index => $service) {
             ServiceSchedule::create([
                 'church_id' => $church->id,
+                'branch_id' => $branch?->id,
                 'service_type' => 'special',
                 'label' => $service['label'],
                 'day_name' => $service['day_name'] ?? null,
@@ -279,5 +301,26 @@ class ChurchController extends Controller
             3 => 'rd',
             default => 'th',
         };
+    }
+
+    private function resolveScopedBranch(Church $church, ?int $branchId): ?Branch
+    {
+        if (! $branchId) {
+            return null;
+        }
+
+        return Branch::query()
+            ->whereKey($branchId)
+            ->where('created_by_church_id', $church->id)
+            ->first();
+    }
+
+    private function resolveServiceSchedules(Church $church, ?Branch $branch)
+    {
+        if (! $branch) {
+            return $church->serviceSchedules()->whereNull('branch_id')->get();
+        }
+
+        return $branch->serviceSchedules()->where('church_id', $church->id)->get();
     }
 }

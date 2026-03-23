@@ -25,6 +25,8 @@ class Branch extends Model
         'email',
         'phone',
         'status',
+        'finance_enabled',
+        'special_services_enabled',
         'created_by_church_id',
         'created_by_user_id',
         'created_by_actor_type',
@@ -98,5 +100,10 @@ class Branch extends Model
     public function homecellAttendanceRecords(): HasMany
     {
         return $this->hasMany(HomecellAttendanceRecord::class)->latest('meeting_date');
+    }
+
+    public function serviceSchedules(): HasMany
+    {
+        return $this->hasMany(ServiceSchedule::class)->orderBy('sort_order');
     }
 }

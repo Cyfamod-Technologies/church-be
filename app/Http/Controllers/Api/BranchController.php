@@ -10,6 +10,7 @@ use App\Models\Branch;
 use App\Models\BranchAssignmentHistory;
 use App\Models\BranchTag;
 use App\Models\Church;
+use App\Support\BranchHierarchy;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -20,17 +21,22 @@ use Illuminate\Support\Str;
 
 class BranchController extends Controller
 {
+    private const DEFAULT_LOCAL_ADMIN_PASSWORD = '12345678';
+
     public function index(Request $request): JsonResponse
     {
         BranchTag::ensureDefaults();
 
         $churchId = $request->integer('church_id');
+        $rootBranchId = $request->integer('branch_id');
         $tag = $request->string('tag')->toString();
         $search = $request->string('search')->toString();
+        $branchScopeIds = $rootBranchId ? BranchHierarchy::descendantIdsInclusive($rootBranchId) : [];
 
         $query = Branch::query()
             ->with($this->branchRelations(false))
             ->when($churchId, fn (Builder $builder) => $builder->where('created_by_church_id', $churchId))
+            ->when($branchScopeIds !== [], fn (Builder $builder) => $builder->whereIn('id', $branchScopeIds))
             ->when($tag !== '', function (Builder $builder) use ($tag) {
                 $builder->whereHas('tag', function (Builder $tagQuery) use ($tag) {
                     $tagQuery->where('slug', $tag)->orWhere('id', $tag);
@@ -53,7 +59,9 @@ class BranchController extends Controller
             'meta' => [
                 'stats' => [
                     'total_branches' => $branches->count(),
-                    'direct_branches' => $churchId ? $branches->where('current_parent_church_id', $churchId)->count() : $branches->whereNotNull('current_parent_church_id')->count(),
+                    'direct_branches' => $rootBranchId
+                        ? $branches->where('current_parent_branch_id', $rootBranchId)->count()
+                        : ($churchId ? $branches->where('current_parent_church_id', $churchId)->count() : $branches->whereNotNull('current_parent_church_id')->count()),
                     'sub_branches' => $branches->whereNotNull('current_parent_branch_id')->count(),
                 ],
             ],
@@ -81,6 +89,8 @@ class BranchController extends Controller
                 'email' => $validated['email'] ?? null,
                 'phone' => $validated['phone'] ?? null,
                 'status' => $validated['status'] ?? 'active',
+                'finance_enabled' => (bool) ($validated['finance_enabled'] ?? false),
+                'special_services_enabled' => (bool) ($validated['special_services_enabled'] ?? false),
                 'created_by_church_id' => $validated['created_by_church_id'],
                 'created_by_user_id' => $validated['created_by_user_id'] ?? null,
                 'created_by_actor_type' => $validated['created_by_actor_type'],
@@ -233,17 +243,22 @@ class BranchController extends Controller
     public function parentOptions(Request $request): JsonResponse
     {
         $excludeBranchId = $request->integer('exclude_branch_id');
+        $rootBranchId = $request->integer('root_branch_id');
         $excludedIds = $excludeBranchId ? $this->collectDescendantIds($excludeBranchId) : [];
+        $rootScopeIds = $rootBranchId ? BranchHierarchy::descendantIdsInclusive($rootBranchId) : [];
 
         if ($excludeBranchId) {
             $excludedIds[] = $excludeBranchId;
         }
 
-        $churches = Church::query()
-            ->orderBy('name')
-            ->get(['id', 'name', 'code']);
+        $churches = $rootBranchId
+            ? collect()
+            : Church::query()
+                ->orderBy('name')
+                ->get(['id', 'name', 'code']);
 
         $branches = Branch::query()
+            ->when($rootScopeIds !== [], fn (Builder $builder) => $builder->whereIn('id', $rootScopeIds))
             ->when($excludedIds !== [], fn (Builder $builder) => $builder->whereNotIn('id', $excludedIds))
             ->with(['tag:id,name,slug'])
             ->orderBy('name')
@@ -312,6 +327,8 @@ class BranchController extends Controller
             'district_area' => $branch->district_area,
             'email' => $branch->email,
             'phone' => $branch->phone,
+            'finance_enabled' => (bool) $branch->finance_enabled,
+            'special_services_enabled' => (bool) $branch->special_services_enabled,
             'pastor_name' => $branch->pastor_name,
             'pastor_phone' => $branch->pastor_phone,
             'pastor_email' => $branch->pastor_email,
@@ -490,6 +507,9 @@ class BranchController extends Controller
         }
 
         $existingAdmin = $branch->localAdmin()->first();
+        $resolvedPassword = filled(data_get($adminData, 'password'))
+            ? (string) data_get($adminData, 'password')
+            : (!$existingAdmin ? self::DEFAULT_LOCAL_ADMIN_PASSWORD : null);
 
         $attributes = [
             'church_id' => $branch->created_by_church_id,
@@ -500,8 +520,8 @@ class BranchController extends Controller
             'role' => 'branch_admin',
         ];
 
-        if (filled(data_get($adminData, 'password'))) {
-            $attributes['password'] = Hash::make($adminData['password']);
+        if (filled($resolvedPassword)) {
+            $attributes['password'] = Hash::make($resolvedPassword);
         }
 
         if ($existingAdmin) {

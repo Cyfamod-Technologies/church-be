@@ -35,6 +35,8 @@ class UpdateBranchRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:30'],
             'status' => ['nullable', 'string', 'max:50'],
+            'finance_enabled' => ['nullable', 'boolean'],
+            'special_services_enabled' => ['nullable', 'boolean'],
             'admin' => ['nullable', 'array'],
             'admin.name' => ['nullable', 'string', 'max:255'],
             'admin.email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($localAdminId)],
@@ -76,9 +78,6 @@ class UpdateBranchRequest extends FormRequest
                 $validator->errors()->add('admin.email', 'Branch admin email is required when creating a branch admin.');
             }
 
-            if (!$localAdminExists && blank(data_get($admin, 'password'))) {
-                $validator->errors()->add('admin.password', 'Branch admin password is required when creating a branch admin.');
-            }
         });
     }
 }

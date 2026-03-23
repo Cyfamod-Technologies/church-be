@@ -32,6 +32,8 @@ class StoreBranchRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:30'],
             'status' => ['nullable', 'string', 'max:50'],
+            'finance_enabled' => ['nullable', 'boolean'],
+            'special_services_enabled' => ['nullable', 'boolean'],
             'created_by_church_id' => ['required', 'integer', Rule::exists(Church::class, 'id')],
             'created_by_user_id' => ['nullable', 'integer', Rule::exists(User::class, 'id')],
             'created_by_actor_type' => ['required', 'string', 'in:church,user'],
@@ -71,9 +73,6 @@ class StoreBranchRequest extends FormRequest
                 $validator->errors()->add('admin.email', 'Branch admin email is required.');
             }
 
-            if (blank(data_get($admin, 'password'))) {
-                $validator->errors()->add('admin.password', 'Branch admin password is required.');
-            }
         });
     }
 }
