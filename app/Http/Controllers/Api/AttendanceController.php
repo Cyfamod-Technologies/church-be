@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UpdateAttendanceRequest;
 use App\Http\Requests\Api\StoreAttendanceRequest;
 use App\Models\AttendanceRecord;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,10 +13,12 @@ use Illuminate\Support\Carbon;
 
 class AttendanceController extends Controller
 {
+    private array $relations = ['church:id,name,code', 'branch:id,name,code', 'serviceSchedule:id,label,service_type', 'recordedBy:id,name,email'];
+
     public function index(Request $request): JsonResponse
     {
         $records = AttendanceRecord::query()
-            ->with(['church:id,name,code', 'branch:id,name,code', 'serviceSchedule:id,label,service_type', 'recordedBy:id,name,email'])
+            ->with($this->relations)
             ->when($request->integer('church_id'), fn (Builder $query, int $churchId) => $query->where('church_id', $churchId))
             ->when($request->integer('branch_id'), fn (Builder $query, int $branchId) => $query->where('branch_id', $branchId))
             ->when($request->filled('service_type'), fn (Builder $query) => $query->where('service_type', $request->string('service_type')->toString()))
@@ -28,39 +31,35 @@ class AttendanceController extends Controller
         return response()->json($records);
     }
 
+    public function show(AttendanceRecord $attendanceRecord): JsonResponse
+    {
+        return response()->json([
+            'data' => $attendanceRecord->load($this->relations),
+        ]);
+    }
+
     public function store(StoreAttendanceRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $total = (int) $validated['male_count'] + (int) $validated['female_count'] + (int) $validated['children_count'];
-        $serviceLabel = $validated['service_label'] ?? $this->buildServiceLabel($validated);
-
-        $record = AttendanceRecord::create([
-            'church_id' => $validated['church_id'],
-            'branch_id' => $validated['branch_id'] ?? null,
-            'service_schedule_id' => $validated['service_schedule_id'] ?? null,
-            'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
-            'service_date' => $validated['service_date'],
-            'service_type' => $validated['service_type'],
-            'service_label' => $serviceLabel,
-            'sunday_service_number' => $validated['sunday_service_number'] ?? null,
-            'special_service_name' => $validated['special_service_name'] ?? null,
-            'male_count' => $validated['male_count'],
-            'female_count' => $validated['female_count'],
-            'children_count' => $validated['children_count'],
-            'total_count' => $total,
-            'first_timers_count' => $validated['first_timers_count'] ?? 0,
-            'new_converts_count' => $validated['new_converts_count'] ?? 0,
-            'rededications_count' => $validated['rededications_count'] ?? 0,
-            'main_offering' => $validated['main_offering'] ?? null,
-            'tithe' => $validated['tithe'] ?? null,
-            'special_offering' => $validated['special_offering'] ?? null,
-            'notes' => $validated['notes'] ?? null,
-        ])->load(['church:id,name,code', 'branch:id,name,code', 'serviceSchedule:id,label,service_type']);
+        $record = AttendanceRecord::create($this->buildRecordPayload($validated))
+            ->load($this->relations);
 
         return response()->json([
             'message' => 'Attendance saved successfully.',
             'data' => $record,
         ], 201);
+    }
+
+    public function update(UpdateAttendanceRequest $request, AttendanceRecord $attendanceRecord): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $attendanceRecord->update($this->buildRecordPayload($validated));
+
+        return response()->json([
+            'message' => 'Attendance updated successfully.',
+            'data' => $attendanceRecord->fresh()->load($this->relations),
+        ]);
     }
 
     public function summary(Request $request): JsonResponse
@@ -134,5 +133,34 @@ class AttendanceController extends Controller
             3 => 'rd',
             default => 'th',
         };
+    }
+
+    private function buildRecordPayload(array $validated): array
+    {
+        $total = (int) $validated['male_count'] + (int) $validated['female_count'] + (int) $validated['children_count'];
+        $serviceLabel = $validated['service_label'] ?? $this->buildServiceLabel($validated);
+
+        return [
+            'church_id' => $validated['church_id'],
+            'branch_id' => $validated['branch_id'] ?? null,
+            'service_schedule_id' => $validated['service_schedule_id'] ?? null,
+            'recorded_by_user_id' => $validated['recorded_by_user_id'] ?? null,
+            'service_date' => $validated['service_date'],
+            'service_type' => $validated['service_type'],
+            'service_label' => $serviceLabel,
+            'sunday_service_number' => $validated['sunday_service_number'] ?? null,
+            'special_service_name' => $validated['special_service_name'] ?? null,
+            'male_count' => $validated['male_count'],
+            'female_count' => $validated['female_count'],
+            'children_count' => $validated['children_count'],
+            'total_count' => $total,
+            'first_timers_count' => $validated['first_timers_count'] ?? 0,
+            'new_converts_count' => $validated['new_converts_count'] ?? 0,
+            'rededications_count' => $validated['rededications_count'] ?? 0,
+            'main_offering' => $validated['main_offering'] ?? null,
+            'tithe' => $validated['tithe'] ?? null,
+            'special_offering' => $validated['special_offering'] ?? null,
+            'notes' => $validated['notes'] ?? null,
+        ];
     }
 }

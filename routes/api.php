@@ -28,7 +28,9 @@ Route::put('churches/{church}/homecell-schedule', [ChurchController::class, 'upd
 
 Route::get('attendance', [AttendanceController::class, 'index']);
 Route::get('attendance/summary', [AttendanceController::class, 'summary']);
+Route::get('attendance/{attendanceRecord}', [AttendanceController::class, 'show']);
 Route::post('attendance', [AttendanceController::class, 'store']);
+Route::put('attendance/{attendanceRecord}', [AttendanceController::class, 'update']);
 
 Route::get('branch-tags', [BranchTagController::class, 'index']);
 Route::post('branch-tags', [BranchTagController::class, 'store']);

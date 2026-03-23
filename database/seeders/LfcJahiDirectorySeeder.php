@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\BranchAssignmentHistory;
 use App\Models\BranchTag;
 use App\Models\Church;
+use App\Models\ChurchUnit;
 use App\Models\Homecell;
 use App\Models\HomecellLeader;
 use App\Models\ServiceSchedule;
@@ -37,6 +38,19 @@ class LfcJahiDirectorySeeder extends Seeder
         $settings = $payload['settings'] ?? [];
         $services = $payload['services'] ?? [];
         $districts = $payload['districts'] ?? [];
+        $churchUnits = array_values(array_filter(
+            (array) ($payload['churchUnits'] ?? [
+                'Technical',
+                'Hospitality',
+                'Counseling',
+                'Choir',
+                'CCU',
+                'Sanctuary',
+                'Security',
+                'Prayer',
+            ]),
+            fn (mixed $unit): bool => filled($unit)
+        ));
         $defaultAdminPassword = (string) data_get($payload, 'defaults.adminPassword', '12345678');
         $defaultLeaderPassword = (string) data_get($payload, 'defaults.homecellLeaderPassword', '12345678');
         $defaultHomecellScheduleLocked = (bool) data_get($payload, 'defaults.homecellScheduleLocked', false);
@@ -63,6 +77,7 @@ class LfcJahiDirectorySeeder extends Seeder
         );
         $admin = $this->upsertAdmin($church, $adminData, $defaultAdminPassword, $createdAt);
         $this->syncServiceSchedules($church, $services, $createdAt);
+        $this->syncChurchUnits($church, $churchUnits, $createdAt);
 
         $this->reservedPhones = User::query()
             ->whereNotNull('phone')
@@ -446,6 +461,36 @@ class LfcJahiDirectorySeeder extends Seeder
     }
 
     /**
+     * @param  array<int, mixed>  $units
+     */
+    private function syncChurchUnits(Church $church, array $units, Carbon $createdAt): void
+    {
+        foreach (array_values($units) as $unit) {
+            $name = $this->sanitizeName((string) $unit);
+
+            if (! $name) {
+                continue;
+            }
+
+            $churchUnit = ChurchUnit::query()->firstOrNew([
+                'church_id' => $church->id,
+                'name' => $name,
+            ]);
+
+            $churchUnit->fill([
+                'code' => $churchUnit->code ?: $this->generateChurchUnitCode($church, $name),
+                'status' => 'active',
+            ]);
+
+            $churchUnit->timestamps = false;
+            $churchUnit->created_at = $churchUnit->exists ? $churchUnit->created_at : $createdAt;
+            $churchUnit->updated_at = $createdAt;
+            $churchUnit->save();
+            $churchUnit->timestamps = true;
+        }
+    }
+
+    /**
      * @return array{name:?string, phone:?string}
      */
     private function parsePerson(mixed $value, mixed $fallbackPhone = null): array
@@ -503,6 +548,13 @@ class LfcJahiDirectorySeeder extends Seeder
         $parts = explode('@', $email);
 
         return $parts[1] ?? 'lfcjahi.com';
+    }
+
+    private function generateChurchUnitCode(Church $church, string $name): string
+    {
+        $suffix = Str::upper(Str::substr(preg_replace('/[^A-Za-z0-9]/', '', $name) ?: 'UNIT', 0, 16));
+
+        return Str::upper($church->code).'-'.$suffix;
     }
 
     private function reservePhone(User $user, ?string $phone): ?string

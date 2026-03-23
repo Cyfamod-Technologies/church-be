@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\AttendanceRecord;
 use App\Models\Branch;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
@@ -44,17 +45,54 @@ class StoreAttendanceRequest extends FormRequest
             $churchId = $this->integer('church_id');
             $branchId = $this->integer('branch_id');
 
-            if (! $branchId || ! $churchId) {
+            if ($branchId && $churchId) {
+                $branchBelongsToChurch = Branch::query()
+                    ->whereKey($branchId)
+                    ->where('created_by_church_id', $churchId)
+                    ->exists();
+
+                if (! $branchBelongsToChurch) {
+                    $validator->errors()->add('branch_id', 'Select a branch that belongs to this church.');
+                }
+            }
+
+            if (! $churchId || ! $this->filled('service_date') || ! $this->filled('service_type')) {
                 return;
             }
 
-            $branchBelongsToChurch = Branch::query()
-                ->whereKey($branchId)
-                ->where('created_by_church_id', $churchId)
-                ->exists();
+            $attendanceRecord = $this->route('attendanceRecord');
+            $currentRecordId = $attendanceRecord instanceof AttendanceRecord ? $attendanceRecord->id : (is_numeric($attendanceRecord) ? (int) $attendanceRecord : null);
 
-            if (! $branchBelongsToChurch) {
-                $validator->errors()->add('branch_id', 'Select a branch that belongs to this church.');
+            $duplicateQuery = AttendanceRecord::query()
+                ->where('church_id', $churchId)
+                ->when($branchId, fn ($query) => $query->where('branch_id', $branchId), fn ($query) => $query->whereNull('branch_id'))
+                ->whereDate('service_date', $this->date('service_date'))
+                ->when($currentRecordId, fn ($query, int $recordId) => $query->whereKeyNot($recordId));
+
+            $serviceScheduleId = $this->integer('service_schedule_id');
+            $serviceType = $this->string('service_type')->toString();
+            $sundayServiceNumber = $this->integer('sunday_service_number');
+            $specialServiceName = trim((string) $this->input('special_service_name', ''));
+            $serviceLabel = trim((string) $this->input('service_label', ''));
+
+            if ($serviceScheduleId) {
+                $duplicateQuery->where('service_schedule_id', $serviceScheduleId);
+            } elseif ($serviceType === 'sunday' && $sundayServiceNumber > 0) {
+                $duplicateQuery
+                    ->where('service_type', 'sunday')
+                    ->where('sunday_service_number', $sundayServiceNumber);
+            } else {
+                $duplicateQuery->where('service_type', $serviceType);
+
+                if ($specialServiceName !== '') {
+                    $duplicateQuery->whereRaw('LOWER(COALESCE(special_service_name, service_label)) = ?', [mb_strtolower($specialServiceName)]);
+                } elseif ($serviceLabel !== '') {
+                    $duplicateQuery->whereRaw('LOWER(service_label) = ?', [mb_strtolower($serviceLabel)]);
+                }
+            }
+
+            if ($duplicateQuery->exists()) {
+                $validator->errors()->add('service_date', 'Attendance has already been recorded for this service on the selected date. Open the existing record and edit it instead.');
             }
         });
     }
