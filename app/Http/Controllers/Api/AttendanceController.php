@@ -18,6 +18,7 @@ class AttendanceController extends Controller
 
     public function index(Request $request): JsonResponse
     {
+        $scope = $request->string('scope', 'church')->toString();
         $branchScopeIds = $request->integer('branch_id')
             ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
             : [];
@@ -26,6 +27,7 @@ class AttendanceController extends Controller
             ->with($this->relations)
             ->when($request->integer('church_id'), fn (Builder $query, int $churchId) => $query->where('church_id', $churchId))
             ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
+            ->when($branchScopeIds === [] && $scope === 'current', fn (Builder $query) => $query->whereNull('branch_id'))
             ->when($request->filled('service_type'), fn (Builder $query) => $query->where('service_type', $request->string('service_type')->toString()))
             ->when($request->filled('date_from'), fn (Builder $query) => $query->whereDate('service_date', '>=', $request->date('date_from')))
             ->when($request->filled('date_to'), fn (Builder $query) => $query->whereDate('service_date', '<=', $request->date('date_to')))
@@ -83,6 +85,7 @@ class AttendanceController extends Controller
             'branch_id' => ['nullable', 'integer', 'exists:branches,id'],
             'period' => ['nullable', 'in:weekly,monthly'],
             'date' => ['nullable', 'date'],
+            'scope' => ['nullable', 'in:current,church'],
         ]);
 
         $anchorDate = $request->filled('date')
@@ -93,6 +96,7 @@ class AttendanceController extends Controller
         [$dateFrom, $dateTo] = $period === 'monthly'
             ? [$anchorDate->copy()->startOfMonth(), $anchorDate->copy()->endOfMonth()]
             : [$anchorDate->copy()->startOfWeek(), $anchorDate->copy()->endOfWeek()];
+        $scope = $request->string('scope', 'church')->toString();
         $branchScopeIds = $request->integer('branch_id')
             ? BranchHierarchy::descendantIdsInclusive($request->integer('branch_id'))
             : [];
@@ -100,6 +104,7 @@ class AttendanceController extends Controller
         $records = AttendanceRecord::query()
             ->where('church_id', $request->integer('church_id'))
             ->when($branchScopeIds !== [], fn (Builder $query) => $query->whereIn('branch_id', $branchScopeIds))
+            ->when($branchScopeIds === [] && $scope === 'current', fn (Builder $query) => $query->whereNull('branch_id'))
             ->whereBetween('service_date', [$dateFrom->toDateString(), $dateTo->toDateString()])
             ->orderBy('service_date')
             ->get();
