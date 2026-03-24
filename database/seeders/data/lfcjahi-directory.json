@@ -23,6 +23,32 @@
     "phone": "+2348066298571",
     "password": "12345678"
   },
+  "sectionManagers": [
+    {
+      "fullName": "LFC Jahi Homecell Manager",
+      "email": "homecell.manager@lfcjahi.com",
+      "phone": "+2348066298574",
+      "role": "homecell_manager"
+    },
+    {
+      "fullName": "LFC Jahi Services Manager",
+      "email": "services.manager@lfcjahi.com",
+      "phone": "+2348066298575",
+      "role": "service_manager"
+    },
+    {
+      "fullName": "LFC Jahi Members Manager",
+      "email": "members.manager@lfcjahi.com",
+      "phone": "+2348066298576",
+      "role": "member_manager"
+    },
+    {
+      "fullName": "LFC Jahi Other Reports Manager",
+      "email": "reports.manager@lfcjahi.com",
+      "phone": "+2348066298577",
+      "role": "report_manager"
+    }
+  ],
   "settings": {
     "financeTracking": false,
     "specialServices": true

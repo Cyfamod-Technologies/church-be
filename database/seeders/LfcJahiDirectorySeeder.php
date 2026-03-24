@@ -35,6 +35,10 @@ class LfcJahiDirectorySeeder extends Seeder
         $churchData = $payload['church'] ?? [];
         $pastorData = $churchData['pastorInCharge'] ?? [];
         $adminData = $payload['primaryAdmin'] ?? [];
+        $sectionManagers = array_values(array_filter(
+            (array) ($payload['sectionManagers'] ?? []),
+            fn (mixed $account): bool => is_array($account)
+        ));
         $settings = $payload['settings'] ?? [];
         $services = $payload['services'] ?? [];
         $districts = $payload['districts'] ?? [];
@@ -76,9 +80,6 @@ class LfcJahiDirectorySeeder extends Seeder
             $createdAt
         );
         $admin = $this->upsertAdmin($church, $adminData, $defaultAdminPassword, $createdAt);
-        $this->syncServiceSchedules($church, $services, $createdAt);
-        $this->syncChurchUnits($church, $churchUnits, $createdAt);
-
         $this->reservedPhones = User::query()
             ->whereNotNull('phone')
             ->pluck('phone')
@@ -89,6 +90,10 @@ class LfcJahiDirectorySeeder extends Seeder
         if ($admin->phone) {
             $this->reservedPhones[$admin->phone] = true;
         }
+
+        $this->syncSectionManagers($church, $sectionManagers, $defaultAdminPassword, $createdAt);
+        $this->syncServiceSchedules($church, $services, $createdAt);
+        $this->syncChurchUnits($church, $churchUnits, $createdAt);
 
         $districtTag = BranchTag::query()->whereNull('church_id')->where('slug', 'district')->firstOrFail();
         $zoneTag = BranchTag::query()->whereNull('church_id')->where('slug', 'zone')->firstOrFail();
@@ -246,6 +251,39 @@ class LfcJahiDirectorySeeder extends Seeder
         $admin->timestamps = true;
 
         return $admin->fresh();
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $sectionManagers
+     */
+    private function syncSectionManagers(Church $church, array $sectionManagers, string $defaultPassword, Carbon $createdAt): void
+    {
+        foreach ($sectionManagers as $sectionManager) {
+            $email = trim((string) ($sectionManager['email'] ?? ''));
+            $role = trim((string) ($sectionManager['role'] ?? ''));
+
+            if ($email === '' || $role === '') {
+                continue;
+            }
+
+            $user = User::query()->firstOrNew([
+                'email' => $email,
+            ]);
+
+            $user->fill([
+                'church_id' => $church->id,
+                'branch_id' => null,
+                'name' => (string) ($sectionManager['fullName'] ?? Str::title(str_replace('_', ' ', $role))),
+                'phone' => $this->reservePhone($user, $sectionManager['phone'] ?? null),
+                'role' => $role,
+            ]);
+            $user->password = (string) ($sectionManager['password'] ?? $defaultPassword);
+            $user->timestamps = false;
+            $user->created_at = $user->exists ? $user->created_at : $createdAt;
+            $user->updated_at = $createdAt;
+            $user->save();
+            $user->timestamps = true;
+        }
     }
 
     private function upsertBranch(
